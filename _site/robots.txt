@@ -1,1 +1,1 @@
-Sitemap: /flexible-jekyll/sitemap.xml
+Sitemap: https://juliazozulia.github.io//sitemap.xml
