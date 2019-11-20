@@ -12,11 +12,11 @@ site-twitter: #if your site has a twitter account, enter it here
 author: Julia Zozulia # add your name
 author-img: julia-zozulia.jpg # add your photo
 about-author: I am a Data Scientist, passionate about solving real-life problems using mathematical methods, building predictive models and getting valuable insight from the data. # add description
-#social-twitter: # add your Twitter handle
-#social-facebook: # add your Facebook handle
+social-twitter: 
+social-facebook: 
 social-github: JuliaZozulia # add your Github handle
-social-linkedin: # add your Linkedin handle
-social-email: y.s.zozulia@gmail.com# add your Email address
+social-linkedin: juliazozulia
+social-email: y.s.zozulia@gmail.com
 
 # Disqus
 discus-identifier: mr-brown # add your discus identifier
