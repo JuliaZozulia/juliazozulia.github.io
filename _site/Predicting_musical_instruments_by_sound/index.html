@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Predicting Musical Instruments by Sound - Hello, world! I'm Julia Zozulia</title>
+
+  <!-- Edit site and author settings in `_config.yml` to make the social details your own -->
+
+    <meta content="Hello, world! I'm Julia Zozulia" property="og:site_name">
+  
+    <meta content="Predicting Musical Instruments by Sound" property="og:title">
+  
+  
+    <meta content="article" property="og:type">
+  
+  
+    <meta content="Music has always been a source of inspiration for many. While is it usually considered that an ability to “understand” music is a preference of human beings, the rapidly increasing popularity of streaming services might argue the point. Spotify, Pandora, Apple Music, Amazon Music, just to name a few, are among our favorite apps. But how do they guess what you would like to hear?" property="og:description">
+  
+  
+    <meta content="https://juliazozulia.github.io//Predicting_musical_instruments_by_sound/" property="og:url">
+  
+  
+    <meta content="2019-11-22T03:00:20-05:00" property="article:published_time">
+    <meta content="https://juliazozulia.github.io//about/" property="article:author">
+  
+  
+    <meta content="https://juliazozulia.github.io//assets/img/michal-czyz-sGS3O-aqffk-unsplash.jpg" property="og:image">
+  
+  
+    
+  
+  
+    
+    <meta content="music" property="article:tag">
+    
+    <meta content="instruments" property="article:tag">
+    
+    <meta content="convolutional neural network" property="article:tag">
+    
+    <meta content="deep learning" property="article:tag">
+    
+  
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+  
+    <meta name="twitter:title" content="Predicting Musical Instruments by Sound">
+  
+  
+    <meta name="twitter:url" content="https://juliazozulia.github.io//Predicting_musical_instruments_by_sound/">
+  
+  
+    <meta name="twitter:description" content="Music has always been a source of inspiration for many. While is it usually considered that an ability to “understand” music is a preference of human beings, the rapidly increasing popularity of streaming services might argue the point. Spotify, Pandora, Apple Music, Amazon Music, just to name a few, are among our favorite apps. But how do they guess what you would like to hear?">
+  
+  
+    <meta name="twitter:image:src" content="https://juliazozulia.github.io//assets/img/michal-czyz-sGS3O-aqffk-unsplash.jpg">
+  
+
+	<meta name="description" content="Music has always been a source of inspiration for many. While is it usually considered that an ability to “understand” music is a preference of human beings, the rapidly increasing popularity of streaming services might argue the point. Spotify, Pandora, Apple Music, Amazon Music, just to name a few, are among our favorite apps. But how do they guess what you would like to hear?">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta property="og:image" content="">
+	<link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="/assets/img/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicon/apple-touch-icon-144x144.png">
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#263959">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#263959">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#263959">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=PT+Serif:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="/assets/fonts/font-awesome/css/font-awesome.min.css">
+	<!-- Styles -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <aside class="sidebar">
+  <header>
+    <div class="about">
+      <div class="cover-author-image">
+        <a href="/"><img src="/assets/img/julia-zozulia.jpg" alt="Julia Zozulia"></a>
+      </div>
+      <div class="author-name">Julia Zozulia</div>
+      <p>I am a Data Scientist, passionate about solving real-life problems using mathematical methods, building predictive models and getting valuable insight from the data.</p>
+    </div>
+  </header> <!-- End Header -->
+  <footer>
+    <section class="contact">
+      <h3 class="contact-title">Contact me</h3>
+      <ul>
+        
+          <li class="github"><a href="http://github.com/JuliaZozulia" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+        
+          <li class="linkedin"><a href="https://in.linkedin.com/in/juliazozulia" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+        
+          <li class="email"><a href="mailto:y.s.zozulia@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+        
+      </ul>
+    </section> <!-- End Section Contact -->
+    <div class="copyright">
+      <p>2019 &copy; Julia Zozulia</p>
+    </div>
+  </footer> <!-- End Footer -->
+</aside> <!-- End Sidebar -->
+<div class="content-box clearfix">
+  <article class="article-page">
+  <div class="page-content">
+    
+    <div class="page-cover-image">
+      <figure>
+        <img class="page-image" src=/assets/img/michal-czyz-sGS3O-aqffk-unsplash.jpg alt="Predicting Musical Instruments by Sound">
+        
+      </figure>
+    </div> <!-- End Page Cover Image -->
+    
+    <div class="wrap-content">
+      <header class="header-page">
+        <h1 class="page-title">Predicting Musical Instruments by Sound</h1>
+        <div class="page-date"><span>2019, Nov 22&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+      </header>
+      <script src="http://api.html5media.info/1.1.8/html5media.min.js"></script>
+
+<p>Music has always been a source of inspiration for many. While is it usually considered that an ability to “understand” music is a preference of human beings, the rapidly increasing popularity of streaming services might argue the point. Spotify, Pandora, Apple Music, Amazon Music, just to name a few, are among our favorite apps. But how do they guess what you would like to hear?</p>
+
+<p>To be competitive, the companies have to make better predictions of what you might like, so they use all the information they can get:</p>
+<ol>
+  <li>
+    <p>Your behavior and other’s behaviors, so it can find users with similar tastes and recommending to you what they like (collaborative filtering);</p>
+  </li>
+  <li>
+    <p>Text information available (lyric, press releases, blog posts, social networks);</p>
+  </li>
+  <li>
+    <p>Raw music file itself, coming up with estimates about time signature, key, mode, tempo, and loudness, instruments used.</p>
+  </li>
+</ol>
+
+<p>The third method can be especially helpful with new music, where the streamer doesn’t have elaborate information yet.</p>
+
+<p>I’ll focus here on recognizing musical instruments from raw sound files. 
+For me it’s always been like a game to guess which instruments are performing right now, especially while listening to classical music, so the idea of making computers to recognize them for me inspired me.</p>
+
+<p>The goal is to develop the model which will allow us to recognize music instruments from the sound of it. I used a convolutional neural network, implementing it using Keras -  high-level neural networks API, running on top of TensorFlow.</p>
+
+<h1 id="dataset">Dataset</h1>
+
+<p>To perform the classification of Musical Instruments by sound, we need to find large dataset with records of sound with information about performer. I used The NSynth Dataset from <a href="https://magenta.tensorflow.org/datasets/nsynth">Magenta</a></p>
+
+<p>Authors intended to create high-quality and large-scale sounds dataset to much those in the image domain (such as MNIST, CIFAR, and ImageNet).</p>
+
+<p>NSynth is an audio dataset containing 305,979 musical notes, each with a unique pitch, timbre, and envelope. For 1,006 instruments from commercial sample libraries, authors generated four seconds, monophonic 16kHz audio snippets, referred to as notes, by ranging over every pitch of a standard MIDI piano (21-108) as well as five different velocities (25, 50, 75, 100, 127). The note was held for the first three seconds and allowed to decay for the final second. This dataset is widely used for music syntheses.</p>
+
+<p>The dataset contains information about instrument family. Frequency counts for instrument classes with Sources as columns a Families as rows:</p>
+
+<p><img src="/assets/img/instruments/frequency counts.jpg" alt="frequency_counts" /></p>
+
+<p>I would like to proceed only with acoustic and electronic, so I ignored synthetic. Also, the dataset contains records of vocal, with is not instrument, so let’s delete them too.</p>
+
+<p>After cleaning, we have 9 classes of instrument families, 1.13 Gb, 9,460 records for training; 371 Mb, 3,039 files for testing.</p>
+
+<h1 id="building-a-model">Building a model</h1>
+<h3 id="defining-the-model">Defining the model:</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">keras</span>
+<span class="kn">from</span> <span class="nn">keras</span> <span class="kn">import</span> <span class="n">regularizers</span>
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Dropout</span><span class="p">,</span> <span class="n">Flatten</span><span class="p">,</span> <span class="n">Conv2D</span><span class="p">,</span> <span class="n">MaxPooling2D</span>
+
+<span class="k">def</span> <span class="nf">build_model</span><span class="p">():</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">52</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="n">mfcc_output_size</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">channel</span><span class="p">)))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">132</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Flatten</span><span class="p">())</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">regularizers</span><span class="o">.</span><span class="n">l2</span><span class="p">(</span><span class="mf">0.001</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s">'softmax'</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="nb">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">categorical_crossentropy</span><span class="p">,</span>
+                  <span class="n">optimizer</span><span class="o">=</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(),</span>
+                  <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s">'accuracy'</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</code></pre></div></div>
+<p><img src="/assets/img/instruments/cnn_strucrute.jpg" alt="cnn_strucrute.jpg
+" /></p>
+<h3 id="fitting-the-model">Fitting the model:</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">X_val</span><span class="p">,</span> <span class="n">Y_val</span><span class="p">))</span>
+</code></pre></div></div>
+<p><img src="/assets/img/instruments/training.jpg" alt="training.jpg
+" /></p>
+
+<p>The validation error after 10 epochs is <strong>98.4%</strong>.  Each epoch took about 1 minute, so the whole training process was completed in 10 minutes (running locally on CPU (AMD FX-8320E Eight-Core Processor 3.5 GHz). 
+There is no need to continue training, as validation error starts to fluctuate after the 7th epoch.</p>
+
+<p><img src="/assets/img/instruments/confusion_matrix.jpg" alt="confusion_matrix
+" /></p>
+
+<p>The confusion matrix looks very good! Among miss-predicted values is keyboard predicted as guitar (7 times) and reed predicted as brass (5 times).</p>
+
+<h1 id="lets-make-predictions">Let’s make predictions!</h1>
+<h3 id="organ">Organ</h3>
+<audio src="organ_electronic_001-048-127.wav" controls="" preload=""></audio>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">filename</span> <span class="o">=</span> <span class="s">"organ_electronic_001-048-127.wav"</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Targeted : "</span> <span class="o">+</span> <span class="n">filename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">'_'</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Predicted: "</span> <span class="o">+</span> <span class="n">predict</span><span class="p">(</span><span class="n">test_path</span><span class="o">+</span><span class="s">'/'</span> <span class="o">+</span> <span class="n">filename</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">))</span>
+<span class="n">ipd</span><span class="o">.</span><span class="n">Audio</span><span class="p">(</span><span class="n">test_path</span><span class="o">+</span><span class="s">'/'</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
+
+<span class="n">Targeted</span> <span class="p">:</span> <span class="n">organ</span>
+<span class="n">Predicted</span><span class="p">:</span> <span class="n">organ</span>
+</code></pre></div></div>
+
+<h3 id="guitar">Guitar</h3>
+<audio src="guitar_acoustic_010-046-025.wav" controls="" preload=""></audio>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">filename</span> <span class="o">=</span> <span class="s">"guitar_acoustic_010-046-025.wav"</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Targeted : "</span> <span class="o">+</span> <span class="n">filename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">'_'</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Predicted: "</span> <span class="o">+</span> <span class="n">predict</span><span class="p">(</span><span class="n">test_path</span><span class="o">+</span><span class="s">'/'</span> <span class="o">+</span> <span class="n">filename</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">))</span>
+<span class="n">ipd</span><span class="o">.</span><span class="n">Audio</span><span class="p">(</span><span class="n">test_path</span><span class="o">+</span><span class="s">'/'</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
+
+<span class="n">Targeted</span> <span class="p">:</span> <span class="n">guitar</span>
+<span class="n">Predicted</span><span class="p">:</span> <span class="n">guitar</span>
+</code></pre></div></div>
+<h3 id="piano">Piano</h3>
+<audio src="keyboard_acoustic_004-048-075.wav" controls="" preload=""></audio>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">filename</span> <span class="o">=</span> <span class="s">"keyboard_acoustic_004-048-075.wav"</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Targeted : "</span> <span class="o">+</span> <span class="n">filename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">'_'</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Predicted: "</span> <span class="o">+</span> <span class="n">predict</span><span class="p">(</span><span class="n">test_path</span><span class="o">+</span><span class="s">'/'</span> <span class="o">+</span> <span class="n">filename</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">))</span>
+<span class="n">ipd</span><span class="o">.</span><span class="n">Audio</span><span class="p">(</span><span class="n">test_path</span><span class="o">+</span><span class="s">'/'</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
+
+
+<span class="n">Targeted</span> <span class="p">:</span> <span class="n">keyboard</span>
+<span class="n">Predicted</span><span class="p">:</span> <span class="n">keyboard</span>
+</code></pre></div></div>
+<h3 id="string">String</h3>
+
+<audio src="string_acoustic_080-048-025.wav" controls="" preload=""></audio>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">filename</span> <span class="o">=</span> <span class="s">"string_acoustic_080-048-025.wav"</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Targeted : "</span> <span class="o">+</span> <span class="n">filename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">'_'</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Predicted: "</span> <span class="o">+</span> <span class="n">predict</span><span class="p">(</span><span class="n">test_path</span><span class="o">+</span><span class="s">'/'</span> <span class="o">+</span> <span class="n">filename</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">))</span>
+<span class="n">ipd</span><span class="o">.</span><span class="n">Audio</span><span class="p">(</span><span class="n">test_path</span><span class="o">+</span><span class="s">'/'</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
+
+<span class="n">Targeted</span> <span class="p">:</span> <span class="n">string</span>
+<span class="n">Predicted</span><span class="p">:</span> <span class="n">string</span>
+</code></pre></div></div>
+
+<p>The network guessed all instruments correctly.</p>
+
+<h1 id="why-convolutional-neural-network-works-here">Why Convolutional Neural Network works here?</h1>
+
+<p>Isn’t it widely known that convolutional neural network works on the images? Why do they work here?
+Look at the mel power spectrogram (with help of <a href="http://nbviewer.jupyter.org/github/librosa/librosa/blob/master/examples/LibROSA%20demo.ipynb">librosa</a> 
+)</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">audio_path</span> <span class="o">=</span> <span class="n">train_path</span> <span class="o">+</span> <span class="s">'/organ_electronic_104-070-127.wav'</span>
+<span class="n">y</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">audio_path</span><span class="p">)</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">melspectrogram</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">n_mels</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
+<span class="c1"># Convert to log scale (dB). We'll use the peak power (max) as reference.
+</span><span class="n">log_S</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">power_to_db</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="nb">max</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">log_S</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="s">'time'</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s">'mel'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">'mel power spectrogram, Organ'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s">'</span><span class="si">%+02.0</span><span class="s">f dB'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">ipd</span><span class="o">.</span><span class="n">Audio</span><span class="p">(</span><span class="n">audio_path</span><span class="p">)</span> 
+
+</code></pre></div></div>
+<h3 id="organ-1">Organ</h3>
+<audio src="organ_electronic_104-070-127.wav" controls="" preload=""></audio>
+
+<p><img src="/assets/img/instruments/organ.jpg" alt="organ
+" /></p>
+<h3 id="string-1">String</h3>
+<audio src="string_acoustic_080-055-075.wav" controls="" preload=""></audio>
+
+<p><img src="/assets/img/instruments/string.jpg" alt="string
+" /></p>
+
+<h3 id="reed">Reed</h3>
+<audio src="reed_acoustic_037-036-100.wav" controls="" preload=""></audio>
+<p><img src="/assets/img/instruments/reed.jpg" alt="reed.jpg
+" /></p>
+
+<p>Do you see the distinctive pattern of each instrument? So does CNN.</p>
+
+<h1 id="future-considerations">Future Considerations</h1>
+
+<p>I would like to expand the model to learn how to recognize instruments not from the single note, but from actual piece of music with a single predominant instrument. I found suitable dataset – <a href="https://www.upf.edu/web/mtg/irmas">IRMAS</a>. But model, similar to the one I successfully used for NSynth Dataset, when trained on IRMAS dataset (with modification to accommodate more complex data), gives me only 47.5% testing accuracy (number of classes – 9). Although training accuracy was ~97%, no matter how I tried to apply regularization of such model.</p>
+
+<p>Also, it would be interesting to use other sound features, which can be extracted from a sound file using Librosa library, like spectral centroid, roll-off frequency, tonal centroid features, zero-crossing rate, etc. It didn’t make sense to with NSynth (as we already have ~98% test accuracy) but it might help with more complex IRMAS dataset.</p>
+
+<h1 id="references">References</h1>
+<p><a href="https://magenta.tensorflow.org/datasets/nsynth">https://magenta.tensorflow.org/datasets/nsynth</a></p>
+
+<p><a href="https://github.com/librosa/librosa">https://github.com/librosa/librosa</a></p>
+
+<p><a href="https://blog.manash.me/building-a-dead-simple-word-recognition-engine-using-convnet-in-keras-25e72c19c12b">https://blog.manash.me/building-a-dead-simple-word-recognition-engine-using-convnet-in-keras-25e72c19c12b</a></p>
+
+<p><a href="http://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html#sphx-glr-auto-examples-model-selection-plot-confusion-matrix-py">http://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html#sphx-glr-auto-examples-model-selection-plot-confusion-matrix-py</a></p>
+
+<p><a href="http://nbviewer.jupyter.org/github/librosa/librosa/blob/master/examples/LibROSA%20demo.ipynb">http://nbviewer.jupyter.org/github/librosa/librosa/blob/master/examples/LibROSA%20demo.ipynb</a></p>
+
+      <div class="page-footer">
+        <div class="page-share">
+          <a href="https://twitter.com/intent/tweet?text=Predicting Musical Instruments by Sound&url=https://juliazozulia.github.io//Predicting_musical_instruments_by_sound/" title="Share on Twitter" rel="nofollow" target="_blank">Twitter</a>
+          <a href="https://facebook.com/sharer.php?u=https://juliazozulia.github.io//Predicting_musical_instruments_by_sound/" title="Share on Facebook" rel="nofollow" target="_blank">Facebook</a>
+          <a href="https://plus.google.com/share?url=https://juliazozulia.github.io//Predicting_musical_instruments_by_sound/" title="Share on Google+" rel="nofollow" target="_blank">Google+</a>
+        </div>
+        <div class="page-tag">
+          
+            <a href="/tags#music" class="tag">&#35; music</a>
+          
+            <a href="/tags#instruments" class="tag">&#35; instruments</a>
+          
+            <a href="/tags#convolutional neural network" class="tag">&#35; convolutional neural network</a>
+          
+            <a href="/tags#deep learning" class="tag">&#35; deep learning</a>
+          
+        </div>
+      </div>
+      <section class="comment-area">
+  <div class="comment-wrapper">
+    
+    <div id="disqus_thread" class="article-comments"></div>
+    <script>
+      (function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//julia_zozulia.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+  </div>
+</section> <!-- End Comment Area -->
+
+    </div> <!-- End Wrap Content -->
+  </div> <!-- End Page Content -->
+</article> <!-- End Article Page -->
+
+</div>
+
+  </div>
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+</script> <!-- End Analytics -->
+
+</body>
+</html>

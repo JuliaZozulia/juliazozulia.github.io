@@ -153,20 +153,20 @@
 
 <p>While the most popular car types - sedans and SUV shows visually similar distributions, Chi-square test of independence shows that distribution of injury severity for sedans and SUV are independent (with p-value 1.77e-28) - in other words, body type indeed affects injury severity:</p>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby">    
-    <span class="n">from</span> <span class="n">scipy</span> <span class="n">import</span> <span class="n">stats</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
 
-    <span class="k">def</span> <span class="nf">get_chi2_p</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span> <span class="n">column_name</span><span class="p">,</span> 
-                   <span class="n">aggregate_column</span><span class="o">=</span><span class="s2">"MAX_VSEV"</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">get_chi2_p</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span> <span class="n">column_name</span><span class="p">,</span> <span class="n">aggregate_column</span><span class="o">=</span><span class="s">"MAX_VSEV"</span><span class="p">):</span>
 
-    <span class="n">props</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="nf">groupby</span><span class="p">(</span><span class="n">column_name</span><span class="p">)</span>
-            <span class="p">[</span><span class="n">aggregate_column</span><span class="p">].</span><span class="nf">value_counts</span><span class="p">().</span><span class="nf">unstack</span><span class="p">()</span>
-    <span class="n">chi2</span><span class="p">,</span> <span class="nb">p</span><span class="p">,</span> <span class="n">dof</span><span class="p">,</span> <span class="n">ex</span> <span class="o">=</span> <span class="n">stats</span><span class="p">.</span><span class="nf">chi2_contingency</span><span class="p">(</span>
-                       <span class="n">props</span><span class="p">[</span><span class="n">props</span><span class="p">.</span><span class="nf">index</span><span class="p">.</span><span class="nf">isin</span><span class="p">(</span><span class="n">filters</span><span class="p">)]</span>
-                       <span class="p">)</span>
-    <span class="k">return</span> <span class="nb">p</span>
-    <span class="n">get_chi2_p</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="p">[</span><span class="s2">"SEDAN"</span><span class="p">,</span> <span class="s2">"SPORT UTILITY VEHICLE"</span><span class="p">],</span> 
-                    <span class="s2">"BODYSTYL_T"</span><span class="p">)</span></code></pre></figure>
+    <span class="n">props</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">column_name</span><span class="p">)[</span><span class="n">aggregate_column</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+    
+    <span class="n">chi2</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">dof</span><span class="p">,</span> <span class="n">ex</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">props</span><span class="p">[</span><span class="n">props</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">filters</span><span class="p">)])</span>
+    
+    <span class="k">return</span> <span class="n">p</span>
+
+<span class="n">get_chi2_p</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="p">[</span><span class="s">"SEDAN"</span><span class="p">,</span> <span class="s">"SPORT UTILITY VEHICLE"</span><span class="p">],</span> <span class="s">"BODYSTYL_T"</span><span class="p">)</span>
+
+<span class="mf">1.7742313124813528e-28</span>
+</code></pre></div></div>
 
 <p><img src="/assets/img/cars/sev_per_make.jpg" alt="sev_per_make" /></p>
 
@@ -192,7 +192,7 @@
 
 <p><img src="/assets/img/cars/sev_per_speeding.jpg" alt="sev_per_speeding" /></p>
 
-<p>Same story with speeding. Chances to get killed or to kill someone during the crash when you’re speeding are $8$ times larger than when you don’t!</p>
+<p>Same story with speeding. Chances to get killed or to kill someone during the crash when you’re speeding are <strong>8</strong> times larger than when you don’t!</p>
 
 <p><img src="/assets/img/cars/sev_per_speed_limit.jpg" alt="sev_per_speed_limit" /></p>
 
@@ -204,15 +204,18 @@
 
 <p>The chi-squared test below shows that the is no significant difference between steering left or right, but there is a strong difference between braking and steering left (right).</p>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby">    <span class="n">get_chi2_p</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="p">[</span><span class="s2">"Steering Right"</span><span class="p">,</span> <span class="s2">"Steering Left"</span><span class="p">],</span> 
-                    <span class="s2">"P_CRASH3"</span><span class="p">)</span>
-    <span class="c1"># 0.4356781892724938</span>
-    <span class="n">get_chi2_p</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="p">[</span><span class="s2">"Braking"</span><span class="p">,</span> <span class="s2">"Steering Left"</span><span class="p">],</span> <span class="s2">"P_CRASH3"</span><span class="p">)</span>
-    <span class="c1"># 4.4512624856085415e-136</span></code></pre></figure>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">get_chi2_p</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="p">[</span><span class="s">"Steering Right"</span><span class="p">,</span> <span class="s">"Steering Left"</span><span class="p">],</span> <span class="s">"P_CRASH3"</span><span class="p">)</span>
+
+<span class="mf">0.4356781892724938</span>
+
+<span class="n">get_chi2_p</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="p">[</span><span class="s">"Braking"</span><span class="p">,</span> <span class="s">"Steering Left"</span><span class="p">],</span> <span class="s">"P_CRASH3"</span><span class="p">)</span>
+
+<span class="mf">4.4512624856085415e-136</span>
+</code></pre></div></div>
 
 <p><img src="/assets/img/cars/sev_per_restr.jpg" alt="sev_per_restr" /></p>
 
-<p>Remember that plots that show that motorcycles are unsafe? Well, driving inside the car without buckling up is even worse! In fact, your chances to get killed are 28 times larger when you are not buckled up! I personally know people who drive without a belt, you can even buy a belt fasteners placeholder on ebay, which will stop your car from beeping in protest. Educating people about the importance of the seat belt is very important.</p>
+<p>Remember that plots that show that motorcycles are unsafe? Well, driving inside the car without buckling up is even worse! In fact, your chances to get killed are <strong>28</strong> times larger when you are not buckled up! I personally know people who drive without a belt, you can even buy a belt fasteners placeholder on ebay, which will stop your car from beeping in protest. Educating people about the importance of the seat belt is very important.</p>
 
 <p>Also, we can see that a rear-facing child seat is safer than front-facing.</p>
 

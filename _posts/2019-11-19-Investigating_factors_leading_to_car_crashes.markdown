@@ -34,23 +34,22 @@ Coupes, as well as convertibles, shows a large fatality rate.
 
 While the most popular car types - sedans and SUV shows visually similar distributions, Chi-square test of independence shows that distribution of injury severity for sedans and SUV are independent (with p-value 1.77e-28) - in other words, body type indeed affects injury severity:
 
-{% highlight ruby %}
+```python
+from scipy import stats
+
+def get_chi2_p(data, filters, column_name, aggregate_column="MAX_VSEV"):
+
+    props = data.groupby(column_name)[aggregate_column].value_counts().unstack()
     
-    from scipy import stats
-
-    def get_chi2_p(data, filters, column_name, 
-                   aggregate_column="MAX_VSEV"):
-
-    props = data.groupby(column_name)
-            [aggregate_column].value_counts().unstack()
-    chi2, p, dof, ex = stats.chi2_contingency(
-                       props[props.index.isin(filters)]
-                       )
+    chi2, p, dof, ex = stats.chi2_contingency(props[props.index.isin(filters)])
+    
     return p
-    get_chi2_p(df, ["SEDAN", "SPORT UTILITY VEHICLE"], 
-                    "BODYSTYL_T")
 
-{% endhighlight %}
+get_chi2_p(df, ["SEDAN", "SPORT UTILITY VEHICLE"], "BODYSTYL_T")
+
+1.7742313124813528e-28
+```
+
 
 ![sev_per_make]({{site.baseurl}}/assets/img/cars/sev_per_make.jpg)
 
@@ -76,7 +75,7 @@ This statistic can be used to persuade people not to drive under alcohol influen
 
 ![sev_per_speeding]({{site.baseurl}}/assets/img/cars/sev_per_speeding.jpg)
 
-Same story with speeding. Chances to get killed or to kill someone during the crash when you’re speeding are $8$ times larger than when you don’t!
+Same story with speeding. Chances to get killed or to kill someone during the crash when you’re speeding are **8** times larger than when you don’t!
 
  
 ![sev_per_speed_limit]({{site.baseurl}}/assets/img/cars/sev_per_speed_limit.jpg)
@@ -89,19 +88,19 @@ If you found yourself in a pre-accident situation, remember, that accidents happ
 
 The chi-squared test below shows that the is no significant difference between steering left or right, but there is a strong difference between braking and steering left (right).
 
-{% highlight ruby %}
+```python
+get_chi2_p(df, ["Steering Right", "Steering Left"], "P_CRASH3")
 
-    get_chi2_p(df, ["Steering Right", "Steering Left"], 
-                    "P_CRASH3")
-    # 0.4356781892724938
-    get_chi2_p(df, ["Braking", "Steering Left"], "P_CRASH3")
-    # 4.4512624856085415e-136
+0.4356781892724938
 
-{% endhighlight %}
+get_chi2_p(df, ["Braking", "Steering Left"], "P_CRASH3")
+
+4.4512624856085415e-136
+```
 
 ![sev_per_restr]({{site.baseurl}}/assets/img/cars/sev_per_restr.jpg)
 
-Remember that plots that show that motorcycles are unsafe? Well, driving inside the car without buckling up is even worse! In fact, your chances to get killed are 28 times larger when you are not buckled up! I personally know people who drive without a belt, you can even buy a belt fasteners placeholder on ebay, which will stop your car from beeping in protest. Educating people about the importance of the seat belt is very important.
+Remember that plots that show that motorcycles are unsafe? Well, driving inside the car without buckling up is even worse! In fact, your chances to get killed are **28** times larger when you are not buckled up! I personally know people who drive without a belt, you can even buy a belt fasteners placeholder on ebay, which will stop your car from beeping in protest. Educating people about the importance of the seat belt is very important.
 
 Also, we can see that a rear-facing child seat is safer than front-facing.
 
