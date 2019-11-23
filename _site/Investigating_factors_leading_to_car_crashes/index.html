@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Investigating factors leading to car crashes. - Hello, world! I'm Julia Zozulia</title>
+	<title>Investigating factors affecting the severity of car crashes - Hello, world! I'm Julia Zozulia</title>
 
   <!-- Edit site and author settings in `_config.yml` to make the social details your own -->
 
     <meta content="Hello, world! I'm Julia Zozulia" property="og:site_name">
   
-    <meta content="Investigating factors leading to car crashes." property="og:title">
+    <meta content="Investigating factors affecting the severity of car crashes" property="og:title">
   
   
     <meta content="article" property="og:type">
@@ -43,7 +43,7 @@
     <meta name="twitter:site" content="@">
     <meta name="twitter:creator" content="@">
   
-    <meta name="twitter:title" content="Investigating factors leading to car crashes.">
+    <meta name="twitter:title" content="Investigating factors affecting the severity of car crashes">
   
   
     <meta name="twitter:url" content="https://juliazozulia.github.io//Investigating_factors_leading_to_car_crashes/">
@@ -117,28 +117,30 @@
     
     <div class="page-cover-image">
       <figure>
-        <img class="page-image" src=/assets/img/Jackson_Street_Bridge.jpg alt="Investigating factors leading to car crashes.">
+        <img class="page-image" src=/assets/img/Jackson_Street_Bridge.jpg alt="Investigating factors affecting the severity of car crashes">
         
       </figure>
     </div> <!-- End Page Cover Image -->
     
     <div class="wrap-content">
       <header class="header-page">
-        <h1 class="page-title">Investigating factors leading to car crashes.</h1>
+        <h1 class="page-title">Investigating factors affecting the severity of car crashes</h1>
         <div class="page-date"><span>2019, Nov 19&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
       </header>
       <p>Almost all of us drive every day. And we all face the danger of a car accident. Every day make a decision - should I drive to the destination via a highway or using local roads? Should I drive my child to school and let the school bus pick him/her up? Should I buy a sedan, SUV or coupe? Those decisions not only impact our convenience, but also our safety.</p>
 
-<p>The goal of this project is to investigate the factors which led to a car accident, including those, impacting the severity of injuries during the impact, as well as create a model to predict car crashes.</p>
+<p>The goal is to investigate the factors which led to a car accident, including those, impacting the severity of injuries during the impact, as well as create a model to predict car crashes. The insights could be used by insurance agencies, car dealers, or just by people who are looking for a new, safer, car.</p>
 
-<p>The project could be used by insurance agencies, car dealers, or just by people who are looking for a new, safer, car.</p>
-
-<p>The dataset contains details about 101480  police-reported car accidents that happened in the US, including information about the vehicle, GPS coordinates,  road conditions, weather, information about the car, driver, severity of injury received by passengers.</p>
+<h1 id="dataset">Dataset</h1>
+<p>I used <a href="https://www.nhtsa.gov/crash-data-systems/crash-report-sampling-system-crss#crash-report-sampling-system-crss-data-files">Crash Report Sampling System (CRSS)</a> data colelction, provided by The National Highway Traffic Safety Administration. It contains details about 101480  police-reported car accidents that happened in the US, including information about the vehicle, GPS coordinates,  road conditions, weather, information about the car, driver, severity of injury received by passengers.</p>
 
 <p>These crash reports are chosen from 60 selected areas across the United States that reflect the geography, population, miles driven, and crashes in the United States.</p>
 
 <p><img src="/assets/img/cars/crss-map-60.jpg" alt="map" /></p>
 
+<h2 id="the-severity-of-the-injury-for-different-vehicles">The severity of the injury for different vehicles</h2>
+<p>The first question I asked is what affects the severity of the injury received if the crash happens. Does it matter what type of car you are in?</p>
+<h3 id="injury-severity-per-body-type">Injury severity per body type</h3>
 <p><img src="/assets/img/cars/sev_per_body_type.jpg" alt="sev_per_body_type" /></p>
 
 <p>This plot shows the normalized distribution of injury severity per body type for accidents happened in 2016-2017 years.</p>
@@ -151,11 +153,9 @@
 
 <p>Coupes, as well as convertibles, shows a large fatality rate.</p>
 
-<p>While the most popular car types - sedans and SUV shows visually similar distributions, Chi-square test of independence shows that distribution of injury severity for sedans and SUV are independent (with p-value 1.77e-28) - in other words, body type indeed affects injury severity:</p>
+<p>While the most popular car types - sedans and SUV shows visually similar distributions, the Chi-square test shows their independence (with very small p-value) - in other words, body type indeed affects injury severity:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
-
-<span class="k">def</span> <span class="nf">get_chi2_p</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span> <span class="n">column_name</span><span class="p">,</span> <span class="n">aggregate_column</span><span class="o">=</span><span class="s">"MAX_VSEV"</span><span class="p">):</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">get_chi2_p</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span> <span class="n">column_name</span><span class="p">,</span> <span class="n">aggregate_column</span><span class="o">=</span><span class="s">"MAX_VSEV"</span><span class="p">):</span>
 
     <span class="n">props</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">column_name</span><span class="p">)[</span><span class="n">aggregate_column</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
     
@@ -168,36 +168,46 @@
 <span class="mf">1.7742313124813528e-28</span>
 </code></pre></div></div>
 
+<h3 id="injury-severity-per-manufacturer">Injury severity per manufacturer</h3>
+
 <p><img src="/assets/img/cars/sev_per_make.jpg" alt="sev_per_make" /></p>
 
 <p>Do your chances to get insured, if a crash happens, depend on the manufacturer of the car you are in? Well, this plot shows that it does. Apart from a truck maker, Volvo is by far the safest car, followed by Mercedes, Lexus, Acura. Infinity and BMV. Mercury, Mitsubishi, Pontiac, and Kia among the least safe.</p>
 
 <p>Now we know that choosing a luxury car is not only about comfort but also about safety. This information could be used by car dealers to promote certain safer brands.</p>
 
+<h3 id="injury-severity-per-year-of-manufacturing">Injury severity per year of manufacturing</h3>
 <p><img src="/assets/img/cars/sev_per_year.jpg" alt="sev_per_year" /></p>
 
-<p>From this plot, we can see those modern cars provide much better protection for its riders against severe and fatal insures. But something happened right after the 2010 year - the percentage of passengers with no or minor injures dropped, while protection against fatal and severe injuries keep improving. So the question of whether to upgrade the car is not only about convenience but also about safety</p>
+<p>From this plot, we can see those modern cars provide much better protection for its riders against severe and fatal insures. But something happened right after the 2010 year - the percentage of passengers with no or minor injures dropped, while protection against fatal and severe injuries keep improving. So the question of whether to upgrade the car is not only about convenience but also about safety.</p>
 
-<h4 id="what-about-factors-that-lead-to-an-accident">What about factors that lead to an accident?</h4>
+<h2 id="factors-that-lead-to-an-accident">Factors that lead to an accident</h2>
+
+<h3 id="timing">Timing</h3>
 
 <p><img src="/assets/img/cars/timing.jpg" alt="timing" /></p>
 
-<p>It seems that the more tires the drivers are, the more accidents happened. Afterwork hours are more dangerous than during the morning rush, and the furthest we are from the beginning of the workweek, the worse.</p>
+<p>It seems that the more tired the drivers are, the more accidents happened. Afterwork hours are more dangerous than during the morning rush, and the furthest we are from the beginning of the workweek, the worse.</p>
 
+<h3 id="alcohol">Alcohol</h3>
 <p><img src="/assets/img/cars/sev_per_alcohol.jpg" alt="sev_per_alcohol" /></p>
 
 <p>Crashes happened when on the drivers is under influence, are much more deadly than those without.</p>
 
 <p>This statistic can be used to persuade people not to drive under alcohol influence. One thing is to know that it is dangerous, and others - know just how much dangerous it is.</p>
 
+<h3 id="speeding">Speeding</h3>
 <p><img src="/assets/img/cars/sev_per_speeding.jpg" alt="sev_per_speeding" /></p>
 
 <p>Same story with speeding. Chances to get killed or to kill someone during the crash when you’re speeding are <strong>8</strong> times larger than when you don’t!</p>
+
+<h3 id="type-of-the-road">Type of the road</h3>
 
 <p><img src="/assets/img/cars/sev_per_speed_limit.jpg" alt="sev_per_speed_limit" /></p>
 
 <p>Accidents with severe injuries happen mostly on highways.</p>
 
+<h3 id="maneuver-to-avoid-accident">Maneuver to avoid accident</h3>
 <p><img src="/assets/img/cars/sev_per_avoidance.jpg" alt="sev_per_avoidance" /></p>
 
 <p>If you found yourself in a pre-accident situation, remember, that accidents happened when driver was trying to maneuver by steering more dangerous than those when you do nothing or just brake.</p>
@@ -213,17 +223,16 @@
 <span class="mf">4.4512624856085415e-136</span>
 </code></pre></div></div>
 
+<h3 id="buckling-up">Buckling up</h3>
 <p><img src="/assets/img/cars/sev_per_restr.jpg" alt="sev_per_restr" /></p>
 
 <p>Remember that plots that show that motorcycles are unsafe? Well, driving inside the car without buckling up is even worse! In fact, your chances to get killed are <strong>28</strong> times larger when you are not buckled up! I personally know people who drive without a belt, you can even buy a belt fasteners placeholder on ebay, which will stop your car from beeping in protest. Educating people about the importance of the seat belt is very important.</p>
 
 <p>Also, we can see that a rear-facing child seat is safer than front-facing.</p>
 
-<p><img src="/assets/img/cars/sev_per_seating.jpg" alt="sev_per_seating" /></p>
-
       <div class="page-footer">
         <div class="page-share">
-          <a href="https://twitter.com/intent/tweet?text=Investigating factors leading to car crashes.&url=https://juliazozulia.github.io//Investigating_factors_leading_to_car_crashes/" title="Share on Twitter" rel="nofollow" target="_blank">Twitter</a>
+          <a href="https://twitter.com/intent/tweet?text=Investigating factors affecting the severity of car crashes&url=https://juliazozulia.github.io//Investigating_factors_leading_to_car_crashes/" title="Share on Twitter" rel="nofollow" target="_blank">Twitter</a>
           <a href="https://facebook.com/sharer.php?u=https://juliazozulia.github.io//Investigating_factors_leading_to_car_crashes/" title="Share on Facebook" rel="nofollow" target="_blank">Facebook</a>
           <a href="https://plus.google.com/share?url=https://juliazozulia.github.io//Investigating_factors_leading_to_car_crashes/" title="Share on Google+" rel="nofollow" target="_blank">Google+</a>
         </div>
