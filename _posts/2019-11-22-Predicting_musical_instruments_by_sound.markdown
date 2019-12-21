@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Predicting Musical Instruments by Sound
+title: Predicting musical instruments by sound
 date: 2019-11-22 11:00:20 +0300
 description: Music has always been a source of inspiration for many. While is it usually considered that an ability to “understand” music is a preference of human beings, the rapidly increasing popularity of streaming services might argue the point. Spotify, Pandora, Apple Music, Amazon Music, just to name a few, are among our favorite apps. But how do they guess what you would like to hear? 
 img: michal-czyz-sGS3O-aqffk-unsplash.jpg

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: What affects our energy bills
-date: 2019-11-21 09:00:20 +0300
+date: 2019-11-25 09:00:20 +0300
 description: We all pay our electric and gas bills, and there are factors that we can actually change in order to minimize our expenses. Knowing what and how influences our bills, we can make an informed decision on how to control our home’s parameters. 
 img: riccardo-annandale-7e2pe9wjL9M-unsplash.jpg # Add image post (optional)
 fig-caption: # Add figcaption (optional)

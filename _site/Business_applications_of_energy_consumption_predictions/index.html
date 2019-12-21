@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Business applications of energy consumption predictions - Julia Zozulia's blog</title>
+
+  <!-- Edit site and author settings in `_config.yml` to make the social details your own -->
+
+    <meta content="Julia Zozulia's blog" property="og:site_name">
+  
+    <meta content="Business applications of energy consumption predictions" property="og:title">
+  
+  
+    <meta content="article" property="og:type">
+  
+  
+    <meta content="The developed model allows us to estimate how much more/less will a household consume under new parameters." property="og:description">
+  
+  
+    <meta content="https://juliazozulia.github.io//Business_applications_of_energy_consumption_predictions/" property="og:url">
+  
+  
+    <meta content="2019-12-20T23:15:20-05:00" property="article:published_time">
+    <meta content="https://juliazozulia.github.io//about/" property="article:author">
+  
+  
+    <meta content="https://juliazozulia.github.io//assets/img/helloquence-5fNmWej4tAA-unsplash.jpg" property="og:image">
+  
+  
+    
+  
+  
+    
+    <meta content="energy consumption" property="article:tag">
+    
+    <meta content="biils" property="article:tag">
+    
+    <meta content="electricity" property="article:tag">
+    
+  
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+  
+    <meta name="twitter:title" content="Business applications of energy consumption predictions">
+  
+  
+    <meta name="twitter:url" content="https://juliazozulia.github.io//Business_applications_of_energy_consumption_predictions/">
+  
+  
+    <meta name="twitter:description" content="The developed model allows us to estimate how much more/less will a household consume under new parameters.">
+  
+  
+    <meta name="twitter:image:src" content="https://juliazozulia.github.io//assets/img/helloquence-5fNmWej4tAA-unsplash.jpg">
+  
+
+	<meta name="description" content="The developed model allows us to estimate how much more/less will a household consume under new parameters.">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta property="og:image" content="">
+	<link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="/assets/img/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicon/apple-touch-icon-144x144.png">
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#263959">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#263959">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#263959">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=PT+Serif:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="/assets/fonts/font-awesome/css/font-awesome.min.css">
+	<!-- Styles -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <aside class="sidebar">
+  <header>
+    <div class="about">
+      <div class="cover-author-image">
+        <a href="/"><img src="/assets/img/julia-zozulia.jpg" alt="Julia Zozulia"></a>
+      </div>
+      <div class="author-name">Julia Zozulia</div>
+      <p>I am a Data Scientist, passionate about solving real-life problems using mathematical methods, building predictive models and getting valuable insight from the data.</p>
+    </div>
+  </header> <!-- End Header -->
+  <footer>
+    <section class="contact">
+      <h3 class="contact-title">Contact me</h3>
+      <ul>
+        
+          <li class="github"><a href="http://github.com/JuliaZozulia" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+        
+          <li class="linkedin"><a href="https://in.linkedin.com/in/juliazozulia" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+        
+          <li class="email"><a href="mailto:y.s.zozulia@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+        
+      </ul>
+    </section> <!-- End Section Contact -->
+    <div class="copyright">
+      <p>2019 &copy; Julia Zozulia</p>
+    </div>
+  </footer> <!-- End Footer -->
+</aside> <!-- End Sidebar -->
+<div class="content-box clearfix">
+  <article class="article-page">
+  <div class="page-content">
+    
+    <div class="page-cover-image">
+      <figure>
+        <img class="page-image" src=/assets/img/helloquence-5fNmWej4tAA-unsplash.jpg alt="Business applications of energy consumption predictions">
+        
+      </figure>
+    </div> <!-- End Page Cover Image -->
+    
+    <div class="wrap-content">
+      <header class="header-page">
+        <h1 class="page-title">Business applications of energy consumption predictions</h1>
+        <div class="page-date"><span>2019, Dec 20&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+      </header>
+      <p>Let’s imagine you are a homeowner trying to minimize your utility cost. Everyone knows that, for example, if you insulate your home well, your energy consumption will go down. But by how much? <strong>How much will I save</strong> per year? <strong>Is it worth the investment?</strong> What will allow to save more: installing new windows or changing heating equipment?</p>
+
+<p>In series of previous posts we 
+<a href="https://juliazozulia.github.io/What_affects_our_energy_bills/">obtained, cleaned and pre-processed data</a> and investigated the influence of different home attributes on it,
+and <a href="https://juliazozulia.github.io/Predicting_residential_energy_consumption_based_on_attributes_of_the_house/">created a model</a> to predict total energy consumption.</p>
+
+<p>The developed model allows us to estimate how much more/less will a household consume under new parameters.</p>
+
+<h1 id="to-estimate-savings-for-consumer">To estimate savings for consumer:</h1>
+<p>Let’s consider an example household:</p>
+<h3 id="one-story-single-family-detached-house-2553-sq-ft-located-in-an-urban-area-in-coldvery-cold-climate-zone">One-story single-family detached house, 2553 sq ft, located in an urban area in Cold/Very Cold climate zone.</h3>
+
+<p>The model estimates total consumption as 127,095 BTU.</p>
+
+<p>House now is poorly insulated. If the owner will insulate the house, his estimated saving will be as follows:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">house_modified</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s">'level of insulation'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'Poorly insulated'</span><span class="p">,</span> <span class="s">'Well insulated'</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">house_modified</span><span class="p">)</span>
+ 
+<span class="n">Original</span> <span class="n">consumption</span><span class="p">:</span> <span class="mf">127095.96</span> <span class="n">BTU</span>
+<span class="n">Modified</span> <span class="n">consumption</span><span class="p">:</span> <span class="mf">125607.74</span> <span class="n">BTU</span>
+<span class="n">Absolute</span> <span class="n">savings</span><span class="p">:</span>     <span class="mf">1488.22</span> <span class="n">BTU</span>
+<span class="n">Percentage</span> <span class="n">savings</span><span class="p">:</span>   <span class="mf">1.17</span> <span class="o">%</span>
+</code></pre></div></div>
+
+<p>Changing windows to energy star qualified:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Absolute</span> <span class="n">savings</span><span class="p">:</span>     <span class="mf">1301.38</span> <span class="n">BTU</span>
+<span class="n">Percentage</span> <span class="n">savings</span><span class="p">:</span>   <span class="mf">1.02</span> <span class="o">%</span>
+</code></pre></div></div>
+<p>Changing main space heating equipment to newer one (same type):</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Absolute</span> <span class="n">savings</span><span class="p">:</span>     <span class="mf">1926.4</span> <span class="n">BTU</span>
+<span class="n">Percentage</span> <span class="n">savings</span><span class="p">:</span>   <span class="mf">1.52</span> <span class="o">%</span>
+</code></pre></div></div>
+<p>Changing main space heating equipment from central furnace to heat pump would save us 6.44%:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Absolute</span> <span class="n">savings</span><span class="p">:</span>     <span class="mf">8179.43</span> <span class="n">BTU</span>
+<span class="n">Percentage</span> <span class="n">savings</span><span class="p">:</span>   <span class="mf">6.44</span> <span class="o">%</span>
+</code></pre></div></div>
+
+<p>Another example:</p>
+<h3 id="rural-1676-sq-ft-single-family-house-located-in-hot-humid-climate">Rural 1676 sq. ft. single-family house located in hot-humid climate.</h3>
+
+<p>Predicted consumption is 90945.05 BTU.</p>
+
+<p>It is already adequately insulated, but, if the owner insulates the house better, he would save 1.01%:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Original</span> <span class="n">consumption</span><span class="p">:</span> <span class="mf">90945.05</span> <span class="n">BTU</span>
+<span class="n">Modified</span> <span class="n">consumption</span><span class="p">:</span> <span class="mf">90024.01</span> <span class="n">BTU</span>
+<span class="n">Absolute</span> <span class="n">savings</span><span class="p">:</span>     <span class="mf">921.04</span> <span class="n">BTU</span>
+<span class="n">Percentage</span> <span class="n">savings</span><span class="p">:</span>   <span class="mf">1.01</span> <span class="o">%</span>
+</code></pre></div></div>
+<p>The occupants keep summer temperature when no one is home during the day at 65°F, which is unusually low. By keeping it at 75°F and installing smart thermostat they would save 1.41%:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Original</span> <span class="n">consumption</span><span class="p">:</span> <span class="mf">90945.05</span> <span class="n">BTU</span>
+<span class="n">Modified</span> <span class="n">consumption</span><span class="p">:</span> <span class="mf">89658.33</span> <span class="n">BTU</span>
+<span class="n">Absolute</span> <span class="n">savings</span><span class="p">:</span>     <span class="mf">1286.72</span> <span class="n">BTU</span>
+<span class="n">Percentage</span> <span class="n">savings</span><span class="p">:</span>   <span class="mf">1.41</span> <span class="o">%</span>
+</code></pre></div></div>
+<p>Not everyone would benefit from installing smart thermostats equally: our first example home would save only 0.14%.</p>
+
+<p>All predictions here are in BTU, which is defined as the amount of heat required to raise the temperature of one pound of water by one degree Fahrenheit (counterpart in the metric system is the calorie). It is used as a unit of power and can be easily converted to whatever source of power the household is using. By knowing the user’s zip, we can easily acquire the corresponding electricity/gas/oil rate at this moment, thus, converting the prediction to monetary equivalent.</p>
+
+<h1 id="to-contractors">To contractors:</h1>
+
+<p>Apart from the end consumer, this model can be used by a variety of businesses, like:</p>
+
+<ul>
+  <li>
+    <p><strong>HVAC contractors</strong>, who would be able to give the customer a very quick estimate of potential savings associated with updating of heating/cooling equipment;</p>
+  </li>
+  <li>
+    <p><strong>Companies selling/installing windows</strong>;</p>
+  </li>
+  <li>
+    <p><strong>Insulation contractors</strong>;</p>
+  </li>
+  <li>
+    <p><strong>Energy assessment companies</strong>, who would be able to recommend customers which parts of the house would yield to the highest savings.</p>
+  </li>
+</ul>
+
+<p>Of course, each of these constructors would be able to estimate potential savings based on detailed engineering calculations, but those are usually very time consuming and require a qualified engineer, while this model allows making a <em>very quick estimate</em>, allowing to <em>keep potential customers</em>.</p>
+
+<h1 id="to-real-estate-brokers">To real estate brokers:</h1>
+
+<p>Another business application of this model is estimating utilities cost while looking for a new home. <strong>Real estate brokers</strong> can incorporate it into their business process to help their customers to make more informed decisions by estimating heating and electric utilities cost for different homes.</p>
+
+<p>As to use the model on full subset of variables need gathering a lot of information about the home, and, in case of using it on new unseen homes, it may be a problem, the better approach would be to use a small subset of variables.</p>
+
+<p>Using subset of top 40 variables (based on tree-based feature importance metrics, and after removal of variable that are hard to estimate for unseen homes), gives us test score of 0.71.</p>
+
+<p>Variables can be split into 3 subsets:</p>
+
+<ul>
+  <li>locations based, can be assessed using zip code;</li>
+  <li>family based,  are characteristics of the household and can get them be creating simple questionnaire for the clients, or, if not possible, using mean values;</li>
+  <li>real estate based, are basic characteristics of building and are easily accessible in the listings.</li>
+</ul>
+
+<p><img src="/assets/img/energy/40_variables.jpg" alt="features" /></p>
+
+<p>This way real estate brokers can have additional valuable information to provide to customers by using very small set of variables and the developed model.</p>
+
+<p><strong>New home buyers</strong>, in return, would be able to predict their utilities bills with high precision. This is one unknown factor less when choosing monthly mortgage payment they can afford.</p>
+
+
+      <div class="page-footer">
+        <div class="page-share">
+          <a href="https://twitter.com/intent/tweet?text=Business applications of energy consumption predictions&url=https://juliazozulia.github.io//Business_applications_of_energy_consumption_predictions/" title="Share on Twitter" rel="nofollow" target="_blank">Twitter</a>
+          <a href="https://facebook.com/sharer.php?u=https://juliazozulia.github.io//Business_applications_of_energy_consumption_predictions/" title="Share on Facebook" rel="nofollow" target="_blank">Facebook</a>
+          <a href="https://plus.google.com/share?url=https://juliazozulia.github.io//Business_applications_of_energy_consumption_predictions/" title="Share on Google+" rel="nofollow" target="_blank">Google+</a>
+        </div>
+        <div class="page-tag">
+          
+            <a href="/tags#energy consumption" class="tag">&#35; energy consumption</a>
+          
+            <a href="/tags#biils" class="tag">&#35; biils</a>
+          
+            <a href="/tags#electricity" class="tag">&#35; electricity</a>
+          
+        </div>
+      </div>
+      <section class="comment-area">
+  <div class="comment-wrapper">
+    
+    <div id="disqus_thread" class="article-comments"></div>
+    <script>
+      (function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//julia_zozulia.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+  </div>
+</section> <!-- End Comment Area -->
+
+    </div> <!-- End Wrap Content -->
+  </div> <!-- End Page Content -->
+</article> <!-- End Article Page -->
+
+</div>
+
+  </div>
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-153204014-1', 'auto');
+  ga('send', 'pageview');
+</script> <!-- End Analytics -->
+
+</body>
+</html>

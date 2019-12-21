@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Predicting residential energy consumption based on attributes of the house - Julia Zozulia's blog</title>
+
+  <!-- Edit site and author settings in `_config.yml` to make the social details your own -->
+
+    <meta content="Julia Zozulia's blog" property="og:site_name">
+  
+    <meta content="Predicting residential energy consumption based on attributes of the house" property="og:title">
+  
+  
+    <meta content="article" property="og:type">
+  
+  
+    <meta content="Explored ElasticNet, SVM, Neural Network, and LightGBM with different sets of features." property="og:description">
+  
+  
+    <meta content="https://juliazozulia.github.io//Predicting_residential_energy_consumption_based_on_attributes_of_the_house/" property="og:url">
+  
+  
+    <meta content="2019-12-14T23:15:20-05:00" property="article:published_time">
+    <meta content="https://juliazozulia.github.io//about/" property="article:author">
+  
+  
+    <meta content="https://juliazozulia.github.io//assets/img/alex-perz-l4MSGX319CE-unsplash.jpg" property="og:image">
+  
+  
+    
+  
+  
+    
+    <meta content="energy consumption" property="article:tag">
+    
+    <meta content="biils" property="article:tag">
+    
+    <meta content="electricity" property="article:tag">
+    
+  
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+  
+    <meta name="twitter:title" content="Predicting residential energy consumption based on attributes of the house">
+  
+  
+    <meta name="twitter:url" content="https://juliazozulia.github.io//Predicting_residential_energy_consumption_based_on_attributes_of_the_house/">
+  
+  
+    <meta name="twitter:description" content="Explored ElasticNet, SVM, Neural Network, and LightGBM with different sets of features.">
+  
+  
+    <meta name="twitter:image:src" content="https://juliazozulia.github.io//assets/img/alex-perz-l4MSGX319CE-unsplash.jpg">
+  
+
+	<meta name="description" content="Explored ElasticNet, SVM, Neural Network, and LightGBM with different sets of features.">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta property="og:image" content="">
+	<link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="/assets/img/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicon/apple-touch-icon-144x144.png">
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#263959">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#263959">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#263959">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=PT+Serif:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="/assets/fonts/font-awesome/css/font-awesome.min.css">
+	<!-- Styles -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <aside class="sidebar">
+  <header>
+    <div class="about">
+      <div class="cover-author-image">
+        <a href="/"><img src="/assets/img/julia-zozulia.jpg" alt="Julia Zozulia"></a>
+      </div>
+      <div class="author-name">Julia Zozulia</div>
+      <p>I am a Data Scientist, passionate about solving real-life problems using mathematical methods, building predictive models and getting valuable insight from the data.</p>
+    </div>
+  </header> <!-- End Header -->
+  <footer>
+    <section class="contact">
+      <h3 class="contact-title">Contact me</h3>
+      <ul>
+        
+          <li class="github"><a href="http://github.com/JuliaZozulia" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+        
+          <li class="linkedin"><a href="https://in.linkedin.com/in/juliazozulia" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+        
+          <li class="email"><a href="mailto:y.s.zozulia@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+        
+      </ul>
+    </section> <!-- End Section Contact -->
+    <div class="copyright">
+      <p>2019 &copy; Julia Zozulia</p>
+    </div>
+  </footer> <!-- End Footer -->
+</aside> <!-- End Sidebar -->
+<div class="content-box clearfix">
+  <article class="article-page">
+  <div class="page-content">
+    
+    <div class="page-cover-image">
+      <figure>
+        <img class="page-image" src=/assets/img/alex-perz-l4MSGX319CE-unsplash.jpg alt="Predicting residential energy consumption based on attributes of the house">
+        
+      </figure>
+    </div> <!-- End Page Cover Image -->
+    
+    <div class="wrap-content">
+      <header class="header-page">
+        <h1 class="page-title">Predicting residential energy consumption based on attributes of the house</h1>
+        <div class="page-date"><span>2019, Dec 14&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+      </header>
+      <p>Today we’ll build a model to predict a residential household energy consumption. 
+<a href="https://juliazozulia.github.io/What_affects_our_energy_bills/">Previous post</a> describes the way we obtained, cleaned and pre-processed data and investigated the influence of different home attributes on it.</p>
+
+<h1 id="model-selection">Model Selection</h1>
+
+<p>To select the best model 4 different ML models have been explored: ElasticNet, SVM, Neural Network (multilayer perceptron), and LightGBM.
+ 
+Also, to select the best subset of features, models with different sets of features have been used.</p>
+
+<p>Data has been split to test and trains set (85% for training and 15% for testing), and 5-fold cross-validation have been used for hyper-parameters tuning.</p>
+
+<p>R2 and MSE for every model are recording for every model.</p>
+
+<p>Here is an example of fitting a model (LGBMRegressor in this case):</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">lightgbm</span> <span class="kn">import</span> <span class="n">LGBMRegressor</span>
+ 
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"boosting_type"</span><span class="p">:</span> <span class="p">[</span><span class="s">"gbdt"</span><span class="p">],</span>
+    <span class="s">"metric"</span><span class="p">:</span> <span class="p">[</span><span class="s">"rmse"</span><span class="p">],</span>
+    <span class="s">"num_leaves"</span><span class="p">:</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span>
+    <span class="s">"bagging_fraction"</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span>
+    <span class="s">"feature_fraction"</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span>
+    <span class="s">"learning_rate"</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">],</span>
+    <span class="s">"lambda_l2"</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+<span class="p">}</span>
+
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">LGBMRegressor</span><span class="p">(</span><span class="n">n_estimators</span> <span class="o">=</span> <span class="mi">40000</span><span class="p">)</span>
+<span class="n">gm_cv</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="n">gm_cv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>As a preprocessing step, data has been scaled and categorical variables have been one-hot encoded.</p>
+
+<h2 id="lightgbm-with-abd-without-one-hot-encoding">LightGBM with abd without one-hot encoding</h2>
+<p>Although, according to <a href="https://lightgbm.readthedocs.io/en/latest/Features.html#optimal-split-for-categorical-features">LightGBM method documentation</a>, it is common to represent categorical features with one-hot encoding, but this approach is suboptimal for tree learners. Particularly for high-cardinality categorical features, a tree built on one-hot features tends to be unbalanced and needs to grow very deep to achieve good accuracy.
+ 
+That’s why I tried both approaches: to feed LightGBM one-hot encoded data and to let LightGBM deal with categorical values on its own to see if this will lead to better performance.</p>
+
+<p>The first approach let to 0.71 test R2 score, while second to 0.74. So I keep using the results of the second approach as a metric for LightGBM.</p>
+
+<h1 id="feature-engineering">Feature Engineering</h1>
+
+<p>For feature engineering, I used Neural Networks and SVM methods for subsets of variables (top 144, 200, 300, and 400 features).</p>
+
+<p>I used two methods to select the top features: the most n important features according to the feature importance metric of LightGBM, and SelectKBest method.</p>
+
+<p>To visualize the results of all methods tried, the following plot has been generated:</p>
+
+<p><img src="/assets/img/energy/r2_scores.jpg" alt="r2_scores" /></p>
+
+<p>According to this plot, the best performance has the neural network on a full subset of variables, with a test score of 0.78, followed by LightGBM with 0.74.</p>
+
+<p>Using a subset of variables doesn’t improve the overall result. But, if we are interested in collecting fewer features to make a prediction, we can use NN with 144 features, which are suggested by LightGBM.</p>
+
+<p><img src="/assets/img/energy/mse_scores.jpg" alt="mse_scores" /></p>
+
+<p>LightGMB is excluded from MSE plot, as the input data for it is not preprocessed, so it not comparable with other methods in absolute value. This plot shows the same tendency as with R2.</p>
+
+<p>Although neural network gives the best performance, it’s very hard to make interpretation from it. So let’s use the next best method - LightGBM for feature interpretation.</p>
+
+<h1 id="features-importance">Features importance</h1>
+
+<p>Let’s investigate the features which affect the prediction the most based on LightGBM method. To be sure that feature importance we observe is not just a property of a certain run of the model, I used the outcome from 5 models obtained from cross-validation.</p>
+
+<p>Red boxplots mean that the feature is positively correlated with the outcome, blue - negative, and green - it ‘s a categorical feature.</p>
+
+<p>Top 50 variables are as follows:</p>
+
+<p><img src="/assets/img/energy/feature_importance.jpg" alt="feature_importance" /></p>
+
+<p>The spread of importance is fairly small, so we can assume that the results are stable.</p>
+
+<p>Having a good predictor is good, but the real impact it’ll have only when used in real world. In our <a href="https://juliazozulia.github.io/Business_applications_of_energy_consumption_predictions/">next post</a>  I’ll tell you about business application of the model we just created.</p>
+
+      <div class="page-footer">
+        <div class="page-share">
+          <a href="https://twitter.com/intent/tweet?text=Predicting residential energy consumption based on attributes of the house&url=https://juliazozulia.github.io//Predicting_residential_energy_consumption_based_on_attributes_of_the_house/" title="Share on Twitter" rel="nofollow" target="_blank">Twitter</a>
+          <a href="https://facebook.com/sharer.php?u=https://juliazozulia.github.io//Predicting_residential_energy_consumption_based_on_attributes_of_the_house/" title="Share on Facebook" rel="nofollow" target="_blank">Facebook</a>
+          <a href="https://plus.google.com/share?url=https://juliazozulia.github.io//Predicting_residential_energy_consumption_based_on_attributes_of_the_house/" title="Share on Google+" rel="nofollow" target="_blank">Google+</a>
+        </div>
+        <div class="page-tag">
+          
+            <a href="/tags#energy consumption" class="tag">&#35; energy consumption</a>
+          
+            <a href="/tags#biils" class="tag">&#35; biils</a>
+          
+            <a href="/tags#electricity" class="tag">&#35; electricity</a>
+          
+        </div>
+      </div>
+      <section class="comment-area">
+  <div class="comment-wrapper">
+    
+    <div id="disqus_thread" class="article-comments"></div>
+    <script>
+      (function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//julia_zozulia.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+  </div>
+</section> <!-- End Comment Area -->
+
+    </div> <!-- End Wrap Content -->
+  </div> <!-- End Page Content -->
+</article> <!-- End Article Page -->
+
+</div>
+
+  </div>
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-153204014-1', 'auto');
+  ga('send', 'pageview');
+</script> <!-- End Analytics -->
+
+</body>
+</html>

@@ -14,7 +14,7 @@ author-img: julia-zozulia.jpg # add your photo
 about-author: I am a Data Scientist, passionate about solving real-life problems using mathematical methods, building predictive models and getting valuable insight from the data. # add description
 social-twitter: 
 social-facebook: 
-social-github: JuliaZozulia # add your Github handle
+social-github: JuliaZozulia 
 social-linkedin: juliazozulia
 social-email: y.s.zozulia@gmail.com
 
@@ -22,7 +22,7 @@ social-email: y.s.zozulia@gmail.com
 discus-identifier: julia_zozulia
 
 # Tracker
-analytics: # Google Analytics
+analytics: UA-153204014-1
 
 # Build Settings
 markdown: kramdown
