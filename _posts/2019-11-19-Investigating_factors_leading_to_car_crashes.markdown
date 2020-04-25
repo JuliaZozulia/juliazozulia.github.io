@@ -3,7 +3,7 @@ layout: post
 title: Investigating factors affecting the severity of car crashes
 date: 2019-11-19 09:00:20 +0300
 description: Almost all of us drive every day. And we all face the danger of a car accident. Every day make a decision - should I drive to the destination via a highway or using local roads? Should I drive my child to school and let the school bus pick him/her up? Should I buy a sedan, SUV or coupe? Those decisions not only impact our convenience, but also our safety.
-img: Jackson_Street_Bridge.jpg # Add image post (optional)
+img: shutterstock_1191528694.jpg # Add image post (optional)
 fig-caption: # Add figcaption (optional)
 tags: [cars, crash, accident]
 ---

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>What is Graph Database and How to Use It - Julia Zozulia's blog</title>
+
+  <!-- Edit site and author settings in `_config.yml` to make the social details your own -->
+
+    <meta content="Julia Zozulia's blog" property="og:site_name">
+  
+    <meta content="What is Graph Database and How to Use It" property="og:title">
+  
+  
+    <meta content="article" property="og:type">
+  
+  
+    <meta content="Unlike traditional relational databases, with a graph database, we have fast access to both data (nodes) and relationships between data points." property="og:description">
+  
+  
+    <meta content="https://juliazozulia.github.io//What_is_Graph_Database_-and_how_to_use_it/" property="og:url">
+  
+  
+    <meta content="2020-04-18T14:15:20-04:00" property="article:published_time">
+    <meta content="https://juliazozulia.github.io//about/" property="article:author">
+  
+  
+    <meta content="https://juliazozulia.github.io//assets/img/22.jpg" property="og:image">
+  
+  
+    
+  
+  
+    
+    <meta content="graph database" property="article:tag">
+    
+    <meta content="neo4j" property="article:tag">
+    
+    <meta content="recommendation system" property="article:tag">
+    
+    <meta content="movies" property="article:tag">
+    
+  
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+  
+    <meta name="twitter:title" content="What is Graph Database and How to Use It">
+  
+  
+    <meta name="twitter:url" content="https://juliazozulia.github.io//What_is_Graph_Database_-and_how_to_use_it/">
+  
+  
+    <meta name="twitter:description" content="Unlike traditional relational databases, with a graph database, we have fast access to both data (nodes) and relationships between data points.">
+  
+  
+    <meta name="twitter:image:src" content="https://juliazozulia.github.io//assets/img/22.jpg">
+  
+
+	<meta name="description" content="Unlike traditional relational databases, with a graph database, we have fast access to both data (nodes) and relationships between data points.">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta property="og:image" content="">
+	<link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="/assets/img/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicon/apple-touch-icon-144x144.png">
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#263959">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#263959">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#263959">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=PT+Serif:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="/assets/fonts/font-awesome/css/font-awesome.min.css">
+	<!-- Styles -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <aside class="sidebar">
+  <header>
+    <div class="about">
+      <div class="cover-author-image">
+        <a href="/"><img src="/assets/img/julia-zozulia.jpg" alt="Julia Zozulia"></a>
+      </div>
+      <div class="author-name">Julia Zozulia</div>
+      <p>I am a Data Scientist, passionate about solving real-life problems using mathematical methods, building predictive models and getting valuable insight from the data.</p>
+    </div>
+  </header> <!-- End Header -->
+  <footer>
+    <section class="contact">
+      <h3 class="contact-title">Contact me</h3>
+      <ul>
+        
+          <li class="github"><a href="http://github.com/JuliaZozulia" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+        
+          <li class="linkedin"><a href="https://in.linkedin.com/in/juliazozulia" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+        
+          <li class="email"><a href="mailto:y.s.zozulia@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+        
+      </ul>
+    </section> <!-- End Section Contact -->
+    <div class="copyright">
+      <p>2020 &copy; Julia Zozulia</p>
+    </div>
+  </footer> <!-- End Footer -->
+</aside> <!-- End Sidebar -->
+<div class="content-box clearfix">
+  <article class="article-page">
+  <div class="page-content">
+    
+    <div class="page-cover-image">
+      <figure>
+        <img class="page-image" src=/assets/img/22.jpg alt="What is Graph Database and How to Use It">
+        
+      </figure>
+    </div> <!-- End Page Cover Image -->
+    
+    <div class="wrap-content">
+      <header class="header-page">
+        <h1 class="page-title">What is Graph Database and How to Use It</h1>
+        <div class="page-date"><span>2020, Apr 18&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+      </header>
+      <h1 id="what-is-graph-database">What is Graph Database?</h1>
+<p>Unlike traditional relational databases, with a graph database, we have fast access to both data (nodes) and relationships between data points.</p>
+
+<p><img src="/assets/img/movies/01.jpg" alt="map" /></p>
+
+<p>The relation database doesn’t save connection data directly. Relationships can be figured out, of course, but the lookup process is rather costly for relationship intensive queries. And that’s where graph database shines with its connections-first approach to data.</p>
+
+<p><img src="/assets/img/movies/02.jpg" alt="map" /></p>
+
+<p>Neo4j is, perhaps, the most popular and easy to use graph platform. Is can be used for a wide variety of tasks, but today we’ll focus on real-time recommendations, creating the system for making movie recommendations.</p>
+<h2 id="whats-inside">What’s inside</h2>
+<p>Neo4j database has 4 basic elements:</p>
+
+<h5 id="nodes">Nodes</h5>
+<ul>
+  <li>Nodes are the main data elements</li>
+  <li>Nodes are connected to other nodes via relationships</li>
+  <li>Nodes can have one or more properties (i.e., attributes stored as key/value pairs)</li>
+  <li>Nodes have one or more labels that describe their role in the graph</li>
+</ul>
+
+<h5 id="relationships">Relationships</h5>
+<ul>
+  <li>Relationships connect two nodes</li>
+  <li>Relationships are directional</li>
+  <li>Nodes can have multiple, even recursive relationships</li>
+  <li>Relationships can have one or more properties (i.e., attributes stored as key/value pairs)</li>
+</ul>
+
+<h5 id="properties">Properties</h5>
+<ul>
+  <li>Properties are named values where the name (or key) is a string</li>
+  <li>Properties can be indexed and constrained</li>
+  <li>Composite indexes can be created from multiple properties</li>
+</ul>
+
+<h5 id="labels">Labels</h5>
+<ul>
+  <li>Labels are used to group nodes into sets</li>
+  <li>A node may have multiple labels</li>
+  <li>Labels are indexed to accelerate finding nodes in the graph</li>
+  <li>Native label indexes are optimized for speed</li>
+</ul>
+
+<p><img src="/assets/img/movies/03.jpg" alt="map" /></p>
+
+<p>Graph query language Cypher is very easy to learn but very powerful. It allows a user to write moderately complex queries even without prior knowledge of this language.</p>
+
+<h1 id="real-time-recommendation-systems">Real-Time Recommendation Systems</h1>
+<p>Perhaps, there is no better way to get a feel of the technology than to use it. And one of the applications where graph databases shine is real-time recommendation systems.  Connect your customers to products, services, information, or other people based on their user profile, preferences, and past online activity such as product purchases. Real-time recommendation engines play a crucial part in the success of any online business.  Another advantage of using a graph database for this model is that it’s easy to visualize and understand the connections and paths with lead us to recommendations.</p>
+
+<p>We’ll start with a movie recommendation system. Fut first we need to get out data.</p>
+
+<h1 id="dataset-description">Dataset Description</h1>
+<p>We’ll use 2 different datasets:</p>
+<ol>
+  <li>MovieLens (Small) dataset, according to its description, describes 5-star rating and free-text tagging activity from http://movielens.org , a movie recommendation service. It contains 100836 ratings and 3683 tag applications across 9742 movies. These data were created by 610 users between March 29, 1996 and September 24, 2018.</li>
+  <li>TMDB 5000 Movie Dataset contains 2 csv files: one with detailed information about the movie (budget, genres, original language, and so forth), the second one – contains movie credits – actors, directors, producers. Only csv file with credentials will be used. 
+https://www.kaggle.com/tmdb/tmdb-movie-metadata</li>
+</ol>
+
+<h3 id="reading-from-movielens">Reading from MovieLens</h3>
+
+<p>File movies.csv has information about movie id, the title along with the year of release in parentheses, and genres.</p>
+
+<p>Each line of file ratings.csv contains a rating made on a 5-star scale, with half-star increments (0.5 stars - 5.0 stars)  of one movie by one user. The user is represented by id only. User ids have been anonymized.</p>
+
+<p>Each row of file tags.csv represents one tag applied to one movie by one user. Tags are user-generated metadata about movies.</p>
+
+<p>All queries have been written using the Cypher language.</p>
+
+<p>To reproduce results, after installation of neo4J engine, go to http://localhost:7474/browser/ and simply enter queries from to the command line at the top of the page:</p>
+
+<p><img src="/assets/img/movies/04.jpg" alt="map" /></p>
+
+<p>Data from MovieLens dataset can be easily downloaded to neo4j database using LOAD CSV function.</p>
+
+<p>First, I placed csv files to %NEO4J_HOME%/import folder.</p>
+
+<p>Let’s download movie information by creating label Movie with properties id and title and label Genre with the single property title:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">LOAD</span> <span class="n">CSV</span> <span class="n">WITH</span> <span class="n">HEADERS</span> <span class="n">FROM</span> <span class="s">"file:///movies.csv"</span> <span class="n">AS</span> <span class="n">line</span>
+ <span class="n">MERGE</span> <span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Movie</span><span class="p">{</span> <span class="nb">id</span><span class="p">:</span><span class="n">line</span><span class="o">.</span><span class="n">movieId</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span><span class="n">line</span><span class="o">.</span><span class="n">title</span><span class="p">})</span> 
+ <span class="n">FOREACH</span> <span class="p">(</span><span class="n">gName</span> <span class="ow">in</span> <span class="n">split</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">genres</span><span class="p">,</span> <span class="s">'|'</span><span class="p">)</span> <span class="o">|</span> 
+    <span class="n">MERGE</span> <span class="p">(</span><span class="n">g</span><span class="p">:</span><span class="n">Genre</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span><span class="n">gName</span><span class="p">})</span> 
+    <span class="n">MERGE</span> <span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">IS_GENRE</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">Added</span> <span class="mi">9762</span> <span class="n">labels</span><span class="p">,</span> <span class="n">created</span> <span class="mi">9762</span> <span class="n">nodes</span><span class="p">,</span> <span class="nb">set</span> <span class="mi">19504</span> <span class="n">properties</span><span class="p">,</span> <span class="n">created</span> <span class="mi">22084</span> <span class="n">relationships</span><span class="p">,</span> <span class="n">completed</span> <span class="n">after</span> <span class="mi">38484</span> <span class="n">ms</span><span class="o">.</span>
+
+</code></pre></div></div>
+<p>By downloading data from ratings.csv we will create label User with only property id (because data about users are anonymized) and connection RATED with property rating:  (User)-[:RATED { rating:}]-&gt;(Movie).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">LOAD</span> <span class="n">CSV</span> <span class="n">WITH</span> <span class="n">HEADERS</span> <span class="n">FROM</span> <span class="s">"file:///ratings.csv"</span> <span class="n">AS</span> <span class="n">line</span>
+ <span class="n">MATCH</span> <span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Movie</span> <span class="p">{</span><span class="nb">id</span><span class="p">:</span><span class="n">line</span><span class="o">.</span><span class="n">movieId</span><span class="p">})</span>
+ <span class="n">MERGE</span> <span class="p">(</span><span class="n">u</span><span class="p">:</span><span class="n">User</span> <span class="p">{</span><span class="nb">id</span><span class="p">:</span><span class="n">line</span><span class="o">.</span><span class="n">userId</span><span class="p">})</span>
+ <span class="n">MERGE</span> <span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">RATED</span> <span class="p">{</span> <span class="n">rating</span><span class="p">:</span> <span class="n">toFloat</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">rating</span><span class="p">)}]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>
+
+<span class="n">Added</span> <span class="mi">610</span> <span class="n">labels</span><span class="p">,</span> <span class="n">created</span> <span class="mi">610</span> <span class="n">nodes</span><span class="p">,</span> <span class="nb">set</span> <span class="mi">101446</span> <span class="n">properties</span><span class="p">,</span> <span class="n">created</span> <span class="mi">100836</span> <span class="n">relationships</span><span class="p">,</span> <span class="n">completed</span> <span class="n">after</span> <span class="mi">695343</span> <span class="n">ms</span><span class="o">.</span>
+
+</code></pre></div></div>
+
+<p>Tags:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">LOAD</span> <span class="n">CSV</span> <span class="n">WITH</span> <span class="n">HEADERS</span> <span class="n">FROM</span> <span class="s">"file:///tags.csv"</span> <span class="n">AS</span> <span class="n">line</span>
+ <span class="n">MATCH</span> <span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Movie</span> <span class="p">{</span><span class="nb">id</span><span class="p">:</span><span class="n">line</span><span class="o">.</span><span class="n">movieId</span><span class="p">})</span>
+ <span class="n">MATCH</span> <span class="p">(</span><span class="n">u</span><span class="p">:</span><span class="n">User</span> <span class="p">{</span><span class="nb">id</span><span class="p">:</span><span class="n">line</span><span class="o">.</span><span class="n">userId</span><span class="p">})</span>
+ <span class="n">CREATE</span> <span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">TAGGED</span> <span class="p">{</span> <span class="n">tag</span><span class="p">:</span> <span class="n">line</span><span class="o">.</span><span class="n">tag</span><span class="p">}]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>
+
+<span class="n">Set</span> <span class="mi">3683</span> <span class="n">properties</span><span class="p">,</span> <span class="n">created</span> <span class="mi">3683</span> <span class="n">relationships</span><span class="p">,</span> <span class="n">completed</span> <span class="n">after</span> <span class="mi">21062</span> <span class="n">ms</span><span class="o">.</span>
+
+</code></pre></div></div>
+
+<p>File Links.csv contains 3 different ids of each movie: movieId – the one used in MovieLens dataset, imdbId – is corresponding to IMDB dataset and tmdbId – id corresponding to tmdb https://www.themoviedb.org/ dataset, which we’ll use to get information about actors and directors of the movies. Let’s add to each movie new property – tmdbId:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">LOAD</span> <span class="n">CSV</span> <span class="n">WITH</span> <span class="n">HEADERS</span> <span class="n">FROM</span> <span class="s">"file:///links.csv"</span> <span class="n">AS</span> <span class="n">line</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Movie</span> <span class="p">{</span><span class="nb">id</span><span class="p">:</span><span class="n">line</span><span class="o">.</span><span class="n">movieId</span><span class="p">})</span>
+<span class="n">SET</span> <span class="n">m</span><span class="o">.</span><span class="n">tmdbId</span><span class="o">=</span><span class="n">line</span><span class="o">.</span><span class="n">tmdbId</span><span class="p">;</span>
+<span class="n">Set</span> <span class="mi">9734</span> <span class="n">properties</span><span class="p">,</span> <span class="n">completed</span> <span class="n">after</span> <span class="mi">63423</span> <span class="n">ms</span><span class="o">.</span>
+
+</code></pre></div></div>
+
+<h2 id="reading-from-tmdb-5000-movie-dataset">Reading from TMDB 5000 Movie Dataset</h2>
+<p>Now let’s proceed with information about actors and directors. As the content of tmdb_5000_credits.csv is not that easy to download to neo4j (csv with JSON format for some columns content) and, taking into the consideration that we don’t need all the information from this file (we will not use, for example, information about Director of Photography of Casting Director to make a recommendation, with all the respect to them), I created create simple Python application wich read all the info from tmdb_5000_credits.csv file, filter it, and created csv file with easy to read for neo4j data. The following csv files were obtained:</p>
+
+<p>The content of file roles.csv:</p>
+
+<p><img src="/assets/img/movies/05.jpg" alt="map" /></p>
+
+<p>And directors.csv:</p>
+
+<p><img src="/assets/img/movies/06.jpg" alt="map" /></p>
+
+<p>Now we can go back to neo4j and read data about directors and actors:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">LOAD</span> <span class="n">CSV</span> <span class="n">WITH</span> <span class="n">HEADERS</span> <span class="n">FROM</span> <span class="s">"file:///directors.csv"</span> <span class="n">AS</span> <span class="n">line</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Movie</span><span class="p">{</span> <span class="n">tmdbId</span><span class="p">:</span><span class="n">line</span><span class="o">.</span><span class="n">movieId</span><span class="p">})</span>
+<span class="n">MERGE</span> <span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">Person</span><span class="p">{</span><span class="n">name</span><span class="p">:</span><span class="n">line</span><span class="o">.</span><span class="n">person_name</span><span class="p">})</span>
+<span class="n">MERGE</span> <span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">DIRECTED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>
+
+<span class="n">Added</span> <span class="mi">339</span> <span class="n">labels</span><span class="p">,</span> <span class="n">created</span> <span class="mi">339</span> <span class="n">nodes</span><span class="p">,</span> <span class="nb">set</span> <span class="mi">339</span> <span class="n">properties</span><span class="p">,</span> <span class="n">created</span> <span class="mi">1889</span> <span class="n">relationships</span><span class="p">,</span> <span class="n">completed</span> <span class="n">after</span> <span class="mi">13784</span> <span class="n">ms</span><span class="o">.</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">LOAD</span> <span class="n">CSV</span> <span class="n">WITH</span> <span class="n">HEADERS</span> <span class="n">FROM</span> <span class="s">"file:///roles.csv"</span> <span class="n">AS</span> <span class="n">line</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Movie</span><span class="p">{</span> <span class="n">tmdbId</span><span class="p">:</span><span class="n">line</span><span class="o">.</span><span class="n">movieId</span><span class="p">})</span>
+<span class="n">MERGE</span> <span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">Person</span><span class="p">{</span><span class="n">name</span><span class="p">:</span><span class="n">line</span><span class="o">.</span><span class="n">person_name</span><span class="p">})</span>
+<span class="n">CREATE</span> <span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="n">ACTED_IN</span><span class="p">]</span> <span class="o">-&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="n">SET</span>  <span class="n">r</span><span class="o">.</span><span class="n">role</span><span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">role</span><span class="p">;</span>
+<span class="n">Added</span> <span class="mi">2922</span> <span class="n">labels</span><span class="p">,</span> <span class="n">created</span> <span class="mi">2922</span> <span class="n">nodes</span><span class="p">,</span> <span class="nb">set</span> <span class="mi">31782</span> <span class="n">properties</span><span class="p">,</span> <span class="n">created</span> <span class="mi">28926</span> <span class="n">relationships</span><span class="p">,</span> <span class="n">completed</span> <span class="n">after</span> <span class="mi">279049</span> <span class="n">ms</span><span class="o">.</span>
+
+</code></pre></div></div>
+
+<p>Here is general information about the obtained database:</p>
+
+<p><img src="/assets/img/movies/07.jpg" alt="map" /></p>
+
+<p>Now we have all the data we need in our database, we can proceed to create a recommendation engine. You can find a <a href="https://juliazozulia.github.io/Movie_Recommendation_System_Content_Based/">content-based approach in this post</a>, and a <a href="https://juliazozulia.github.io/Movie_Recommendation_System_Collaborative_Filtering/">collaborative filtering model here</a>.</p>
+
+
+      <div class="page-footer">
+        <div class="page-share">
+          <a href="https://twitter.com/intent/tweet?text=What is Graph Database and How to Use It&url=https://juliazozulia.github.io//What_is_Graph_Database_-and_how_to_use_it/" title="Share on Twitter" rel="nofollow" target="_blank">Twitter</a>
+          <a href="https://facebook.com/sharer.php?u=https://juliazozulia.github.io//What_is_Graph_Database_-and_how_to_use_it/" title="Share on Facebook" rel="nofollow" target="_blank">Facebook</a>
+          <a href="https://plus.google.com/share?url=https://juliazozulia.github.io//What_is_Graph_Database_-and_how_to_use_it/" title="Share on Google+" rel="nofollow" target="_blank">Google+</a>
+        </div>
+        <div class="page-tag">
+          
+            <a href="/tags#graph database" class="tag">&#35; graph database</a>
+          
+            <a href="/tags#neo4j" class="tag">&#35; neo4j</a>
+          
+            <a href="/tags#recommendation system" class="tag">&#35; recommendation system</a>
+          
+            <a href="/tags#movies" class="tag">&#35; movies</a>
+          
+        </div>
+      </div>
+      <section class="comment-area">
+  <div class="comment-wrapper">
+    
+    <div id="disqus_thread" class="article-comments"></div>
+    <script>
+      (function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//julia_zozulia.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+  </div>
+</section> <!-- End Comment Area -->
+
+    </div> <!-- End Wrap Content -->
+  </div> <!-- End Page Content -->
+</article> <!-- End Article Page -->
+
+</div>
+
+  </div>
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-153204014-1', 'auto');
+  ga('send', 'pageview');
+</script> <!-- End Analytics -->
+
+</body>
+</html>

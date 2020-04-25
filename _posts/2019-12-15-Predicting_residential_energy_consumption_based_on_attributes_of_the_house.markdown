@@ -3,7 +3,7 @@ layout: post
 title:  Predicting residential energy consumption based on attributes of the house
 date: 2019-12-15 07:15:20 +0300
 description: Explored ElasticNet, SVM, Neural Network, and LightGBM with different sets of features.
-img: alex-perz-l4MSGX319CE-unsplash.jpg # Add image post (optional)
+img: shutterstock_1043842864.jpg # Add image post (optional)
 fig-caption: # Add figcaption (optional)
 tags: [energy consumption, biils, electricity]
 ---

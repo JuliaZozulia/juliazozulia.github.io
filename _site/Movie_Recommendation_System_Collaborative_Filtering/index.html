@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Movie Recommendation System Using Graph Database - Collaborative Filtering - Julia Zozulia's blog</title>
+
+  <!-- Edit site and author settings in `_config.yml` to make the social details your own -->
+
+    <meta content="Julia Zozulia's blog" property="og:site_name">
+  
+    <meta content="Movie Recommendation System Using Graph Database - Collaborative Filtering" property="og:title">
+  
+  
+    <meta content="article" property="og:type">
+  
+  
+    <meta content="Today we'll take final step to create a model for movie recommendation system. We all like the way services like Netflix shows us just the movie we'll want to watch today, don't we? The perfect way to do it is to use content-based or collaborative filtering model, and even better - the combination of both." property="og:description">
+  
+  
+    <meta content="https://juliazozulia.github.io//Movie_Recommendation_System_Collaborative_Filtering/" property="og:url">
+  
+  
+    <meta content="2020-04-24T06:05:20-04:00" property="article:published_time">
+    <meta content="https://juliazozulia.github.io//about/" property="article:author">
+  
+  
+    <meta content="https://juliazozulia.github.io//assets/img/shutterstock_714854689.jpg" property="og:image">
+  
+  
+    
+  
+  
+    
+    <meta content="graph database" property="article:tag">
+    
+    <meta content="neo4j" property="article:tag">
+    
+    <meta content="recommendation system" property="article:tag">
+    
+    <meta content="movies" property="article:tag">
+    
+  
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+  
+    <meta name="twitter:title" content="Movie Recommendation System Using Graph Database - Collaborative Filtering">
+  
+  
+    <meta name="twitter:url" content="https://juliazozulia.github.io//Movie_Recommendation_System_Collaborative_Filtering/">
+  
+  
+    <meta name="twitter:description" content="Today we'll take final step to create a model for movie recommendation system. We all like the way services like Netflix shows us just the movie we'll want to watch today, don't we? The perfect way to do it is to use content-based or collaborative filtering model, and even better - the combination of both.">
+  
+  
+    <meta name="twitter:image:src" content="https://juliazozulia.github.io//assets/img/shutterstock_714854689.jpg">
+  
+
+	<meta name="description" content="Today we'll take final step to create a model for movie recommendation system. We all like the way services like Netflix shows us just the movie we'll want to watch today, don't we? The perfect way to do it is to use content-based or collaborative filtering model, and even better - the combination of both.">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta property="og:image" content="">
+	<link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="/assets/img/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicon/apple-touch-icon-144x144.png">
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#263959">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#263959">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#263959">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=PT+Serif:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="/assets/fonts/font-awesome/css/font-awesome.min.css">
+	<!-- Styles -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <aside class="sidebar">
+  <header>
+    <div class="about">
+      <div class="cover-author-image">
+        <a href="/"><img src="/assets/img/julia-zozulia.jpg" alt="Julia Zozulia"></a>
+      </div>
+      <div class="author-name">Julia Zozulia</div>
+      <p>I am a Data Scientist, passionate about solving real-life problems using mathematical methods, building predictive models and getting valuable insight from the data.</p>
+    </div>
+  </header> <!-- End Header -->
+  <footer>
+    <section class="contact">
+      <h3 class="contact-title">Contact me</h3>
+      <ul>
+        
+          <li class="github"><a href="http://github.com/JuliaZozulia" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+        
+          <li class="linkedin"><a href="https://in.linkedin.com/in/juliazozulia" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+        
+          <li class="email"><a href="mailto:y.s.zozulia@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+        
+      </ul>
+    </section> <!-- End Section Contact -->
+    <div class="copyright">
+      <p>2020 &copy; Julia Zozulia</p>
+    </div>
+  </footer> <!-- End Footer -->
+</aside> <!-- End Sidebar -->
+<div class="content-box clearfix">
+  <article class="article-page">
+  <div class="page-content">
+    
+    <div class="page-cover-image">
+      <figure>
+        <img class="page-image" src=/assets/img/shutterstock_714854689.jpg alt="Movie Recommendation System Using Graph Database - Collaborative Filtering">
+        
+      </figure>
+    </div> <!-- End Page Cover Image -->
+    
+    <div class="wrap-content">
+      <header class="header-page">
+        <h1 class="page-title">Movie Recommendation System Using Graph Database - Collaborative Filtering</h1>
+        <div class="page-date"><span>2020, Apr 24&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+      </header>
+      <p>Today we’ll take the final step to create a model for the movie recommendation system. We all like the way services as Netflix shows us just the movie we’ll want to watch today, don’t we? The perfect way to do it is to use a content-based or collaborative filtering model.</p>
+
+<p>In previous posts, we In previous posts, we get to known <a href="https://juliazozulia.github.io/What_is_Graph_Database_-and_how_to_use_it/">what is to neo4j database and how to read data there</a>, and <a href="https://juliazozulia.github.io/Movie_Recommendation_System_Content_Based/">created a content-based filtering model</a>. Today we’ll build a collaborative filtering recommendation engine.</p>
+
+<p>Neo4j fits perfectly for this task. We’ll have to use connections between entities, like find movies likes by user1 which also are liked by other users, and then find movies that other users liked, but user1 hasn’t seen. Using traditional relational databases will lead to a large number of joints, which are very expensive for RDBMS. With a graph database, on the other hand, we have fast access to both data (user, movie, genre) and relationships between them. As all relationships are easily and quickly acceptable, it allows us to process queries very fast, enabling using the model for real-time recommendation engines.</p>
+
+<p>First, let’s examine how our data looks like. To do that, let’s run the following Cypher query to retweet all genres, actors, and director of a movie:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MATCH</span> <span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Movie</span> <span class="p">{</span><span class="n">title</span><span class="p">:</span> <span class="s">"Harry Potter and the Sorcerer's Stone (a.k.a. Harry Potter and the Philosopher's Stone) (2001)"</span><span class="p">})</span><span class="o">-</span><span class="p">[:</span><span class="n">ACTED_IN</span><span class="o">|</span><span class="p">:</span><span class="n">IS_GENRE</span><span class="o">|</span><span class="p">:</span><span class="n">DIRECTED</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="n">RETURN</span> <span class="n">m</span><span class="p">,</span> <span class="n">p</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/movies/1.jpg" alt="map" /></p>
+
+<p>Movies with shared actors or directors (connected thought 2nd-degree connection):</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MATCH</span> <span class="n">q</span><span class="o">=</span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Movie</span> <span class="p">{</span><span class="n">title</span><span class="p">:</span> <span class="s">"Harry Potter and the Sorcerer's Stone (a.k.a. Harry Potter and the Philosopher's Stone) (2001)"</span><span class="p">})</span><span class="o">-</span><span class="p">[:</span><span class="n">ACTED_IN</span> <span class="o">|</span><span class="p">:</span><span class="n">DIRECTED</span><span class="o">*.</span><span class="mf">.2</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="n">RETURN</span> <span class="n">q</span> <span class="n">LIMIT</span> <span class="mi">50</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/movies/2.jpg" alt="map" /></p>
+
+<p>Now, when we are familiar with data, let’s build find some recommendations, starting with the simplest one and gradually increasing the complexity of our queries.</p>
+
+<h2 id="collaborative-filtering">Collaborative Filtering</h2>
+
+<p>The approach when we are taking into consideration only what other users liked is called Collaborative Filtering.</p>
+
+<p>Let’s find movies targeted user likes, then find users who also liked that movies, and recommend movies that other users liked but which our user haven’t seen (rated), sorted by the number of paths that led to a particular recommendation.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MATCH</span> <span class="p">(</span><span class="n">me</span><span class="p">:</span><span class="n">User</span><span class="p">{</span><span class="nb">id</span><span class="p">:</span><span class="s">'220'</span><span class="p">})</span><span class="o">-</span><span class="p">[</span><span class="n">r1</span><span class="p">:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Movie</span><span class="p">)</span><span class="o">&lt;-</span><span class="p">[</span><span class="n">r2</span><span class="p">:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">other</span><span class="p">:</span><span class="n">User</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">r3</span><span class="p">:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m2</span><span class="p">:</span><span class="n">Movie</span><span class="p">)</span>
+<span class="n">WHERE</span> <span class="n">r1</span><span class="o">.</span><span class="n">rating</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="n">AND</span> <span class="n">r2</span><span class="o">.</span><span class="n">rating</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="n">AND</span> <span class="n">r3</span><span class="o">.</span><span class="n">rating</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="n">AND</span> <span class="n">NOT</span> <span class="p">(</span><span class="n">me</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m2</span><span class="p">)</span>
+<span class="n">RETURN</span> <span class="n">distinct</span> <span class="n">m2</span> <span class="n">AS</span> <span class="n">recommended_movie</span><span class="p">,</span> <span class="n">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="n">AS</span> <span class="n">score</span>
+<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">score</span> <span class="n">DESC</span>
+<span class="n">LIMIT</span> <span class="mi">9</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/movies/4.jpg" alt="map" /></p>
+
+<p>As each user tends to give higher or lower ratings in general, let’s filter by the average rating of a particular user, rather than just constant “3”:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MATCH</span> <span class="p">(</span><span class="n">me</span><span class="p">:</span><span class="n">User</span><span class="p">{</span><span class="nb">id</span><span class="p">:</span><span class="s">'220'</span><span class="p">})</span><span class="o">-</span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="n">WITH</span> <span class="n">me</span><span class="p">,</span> <span class="n">avg</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">rating</span><span class="p">)</span> <span class="n">AS</span> <span class="n">average</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">me</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">r1</span><span class="p">:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Movie</span><span class="p">)</span><span class="o">&lt;-</span><span class="p">[</span><span class="n">r2</span><span class="p">:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">other</span><span class="p">:</span><span class="n">User</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">r3</span><span class="p">:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m2</span><span class="p">:</span><span class="n">Movie</span><span class="p">)</span>
+<span class="n">WHERE</span> <span class="n">r1</span><span class="o">.</span><span class="n">rating</span> <span class="o">&gt;</span> <span class="n">average</span> <span class="n">AND</span> <span class="n">r2</span><span class="o">.</span><span class="n">rating</span> <span class="o">&gt;</span> <span class="n">average</span> <span class="n">AND</span> <span class="n">r3</span><span class="o">.</span><span class="n">rating</span> <span class="o">&gt;</span> <span class="n">average</span> <span class="n">AND</span> <span class="n">NOT</span> <span class="p">(</span><span class="n">me</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m2</span><span class="p">)</span>
+<span class="n">RETURN</span> <span class="n">distinct</span> <span class="n">m2</span> <span class="n">AS</span> <span class="n">recommended_movie</span><span class="p">,</span> <span class="n">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="n">AS</span> <span class="n">score</span>
+<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">score</span> <span class="n">DESC</span>
+<span class="n">LIMIT</span> <span class="mi">9</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/movies/5.jpg" alt="map" /></p>
+
+<p>Here is a visualization of some connections in the previous query:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MATCH</span> <span class="p">(</span><span class="n">me</span><span class="p">:</span><span class="n">User</span><span class="p">{</span><span class="nb">id</span><span class="p">:</span><span class="s">'220'</span><span class="p">})</span><span class="o">-</span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="n">WITH</span> <span class="n">me</span><span class="p">,</span> <span class="n">avg</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">rating</span><span class="p">)</span> <span class="n">AS</span> <span class="n">average</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">me</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">r1</span><span class="p">:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Movie</span><span class="p">)</span><span class="o">&lt;-</span><span class="p">[</span><span class="n">r2</span><span class="p">:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">other</span><span class="p">:</span><span class="n">User</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">r3</span><span class="p">:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m2</span><span class="p">:</span><span class="n">Movie</span><span class="p">)</span>
+<span class="n">WHERE</span> <span class="n">r1</span><span class="o">.</span><span class="n">rating</span> <span class="o">&gt;</span> <span class="n">average</span> <span class="n">AND</span> <span class="n">r2</span><span class="o">.</span><span class="n">rating</span> <span class="o">&gt;</span> <span class="n">average</span> <span class="n">AND</span> <span class="n">r3</span><span class="o">.</span><span class="n">rating</span> <span class="o">&gt;</span> <span class="n">average</span> <span class="n">AND</span> <span class="n">NOT</span> <span class="p">(</span><span class="n">me</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m2</span><span class="p">)</span>
+<span class="n">RETURN</span> <span class="n">distinct</span> <span class="n">m2</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">me</span><span class="p">,</span> <span class="n">m</span> <span class="n">AS</span> <span class="n">recommended_movie</span><span class="p">,</span> <span class="n">count</span><span class="p">(</span><span class="n">m2</span><span class="p">)</span> <span class="n">AS</span> <span class="n">score</span>
+<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">score</span> <span class="n">DESC</span>
+<span class="n">LIMIT</span> <span class="mi">20</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/movies/6.jpg" alt="map" /></p>
+
+<h2 id="similar-users">“Similar” Users</h2>
+
+<p>Instead of taking into consideration the opinion of all users in the system, let’s find most “similar” users; users who have the same taste. The easiest way to do so is to find the correlation coefficient between the targeted user and others, and then use ratings given only by “same-minded” users.</p>
+
+<p>We’ll use the sample Pearson correlation coefficient, which is defined as follows:</p>
+
+<p><img src="/assets/img/movies/pearson.jpg" alt="map" /></p>
+
+<p>Let’s find users with a large correlation coefficient between ratings given by our user and all others:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MATCH</span> <span class="p">(</span><span class="n">me</span><span class="p">:</span><span class="n">User</span> <span class="p">{</span><span class="nb">id</span><span class="p">:</span><span class="s">"220"</span><span class="p">})</span><span class="o">-</span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Movie</span><span class="p">)</span>
+<span class="n">WITH</span> <span class="n">me</span><span class="p">,</span> <span class="n">avg</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">rating</span><span class="p">)</span> <span class="n">AS</span> <span class="n">my_average</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">me</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">r1</span><span class="p">:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Movie</span><span class="p">)</span><span class="o">&lt;-</span><span class="p">[</span><span class="n">r2</span><span class="p">:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+<span class="n">WITH</span> <span class="n">me</span><span class="p">,</span> <span class="n">my_average</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">COLLECT</span><span class="p">({</span><span class="n">r1</span><span class="p">:</span> <span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">:</span> <span class="n">r2</span><span class="p">})</span> <span class="n">AS</span> <span class="n">ratings</span> <span class="n">WHERE</span> <span class="n">size</span><span class="p">(</span><span class="n">ratings</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Movie</span><span class="p">)</span>
+<span class="n">WITH</span> <span class="n">me</span><span class="p">,</span> <span class="n">my_average</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">avg</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">rating</span><span class="p">)</span> <span class="n">AS</span> <span class="n">other_average</span><span class="p">,</span> <span class="n">ratings</span>
+<span class="n">UNWIND</span> <span class="n">ratings</span> <span class="n">AS</span> <span class="n">r</span>
+<span class="n">WITH</span> <span class="nb">sum</span><span class="p">(</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">r1</span><span class="o">.</span><span class="n">rating</span><span class="o">-</span> <span class="n">my_average</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">r2</span><span class="o">.</span><span class="n">rating</span><span class="o">-</span> <span class="n">other_average</span><span class="p">)</span> <span class="p">)</span> <span class="n">AS</span> <span class="n">a</span><span class="p">,</span>
+<span class="n">sqrt</span><span class="p">(</span> <span class="nb">sum</span><span class="p">(</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">r1</span><span class="o">.</span><span class="n">rating</span> <span class="o">-</span> <span class="n">my_average</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">r2</span><span class="o">.</span><span class="n">rating</span> <span class="o">-</span> <span class="n">other_average</span><span class="p">)</span> <span class="o">^</span><span class="mi">2</span><span class="p">))</span> <span class="n">AS</span> <span class="n">b</span><span class="p">,</span>
+<span class="n">me</span><span class="p">,</span> <span class="n">other</span> 
+<span class="n">WHERE</span> <span class="n">b</span> <span class="o">&lt;&gt;</span> <span class="mi">0</span>
+<span class="n">RETURN</span> <span class="n">me</span><span class="o">.</span><span class="nb">id</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="nb">id</span><span class="p">,</span> <span class="n">a</span><span class="o">/</span><span class="n">b</span> <span class="k">as</span> <span class="n">correlation</span>
+<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">correlation</span> <span class="n">DESC</span> <span class="n">LIMIT</span> <span class="mi">10</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/movies/7.jpg" alt="map" /></p>
+
+<p>Let’s show how does similarly rated movies look like for targeted user and the one with the largest correlation value:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MATCH</span> <span class="p">(</span><span class="n">me</span><span class="p">:</span><span class="n">User</span> <span class="p">{</span><span class="nb">id</span><span class="p">:</span><span class="s">"220"</span><span class="p">})</span><span class="o">-</span><span class="p">[:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Movie</span><span class="p">)</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">other</span><span class="p">:</span><span class="n">User</span> <span class="p">{</span><span class="nb">id</span><span class="p">:</span><span class="s">"494"</span><span class="p">})</span><span class="o">-</span><span class="p">[:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Movie</span><span class="p">)</span>
+<span class="n">RETURN</span> <span class="n">me</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">m</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/movies/8.jpg" alt="map" /></p>
+
+<p>As we see, highly rated movies by user 220 are also highly rated by user 494; poorly rated movies by user 220 are also poorly rated by user 494.</p>
+
+<h3 id="positive-correlated-recommendations">Positive Correlated Recommendations</h3>
+
+<p>Let’s use this property to find recommended movies:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MATCH</span> <span class="p">(</span><span class="n">me</span><span class="p">:</span><span class="n">User</span> <span class="p">{</span><span class="nb">id</span><span class="p">:</span><span class="s">"220"</span><span class="p">})</span><span class="o">-</span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Movie</span><span class="p">)</span>
+<span class="n">WITH</span> <span class="n">me</span><span class="p">,</span> <span class="n">avg</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">rating</span><span class="p">)</span> <span class="n">AS</span> <span class="n">my_average</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">me</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">r1</span><span class="p">:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Movie</span><span class="p">)</span><span class="o">&lt;-</span><span class="p">[</span><span class="n">r2</span><span class="p">:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+<span class="n">WITH</span> <span class="n">me</span><span class="p">,</span> <span class="n">my_average</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">COLLECT</span><span class="p">({</span><span class="n">r1</span><span class="p">:</span> <span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">:</span> <span class="n">r2</span><span class="p">})</span> <span class="n">AS</span> <span class="n">ratings</span> <span class="n">WHERE</span> <span class="n">size</span><span class="p">(</span><span class="n">ratings</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Movie</span><span class="p">)</span>
+<span class="n">WITH</span> <span class="n">me</span><span class="p">,</span> <span class="n">my_average</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">avg</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">rating</span><span class="p">)</span> <span class="n">AS</span> <span class="n">other_average</span><span class="p">,</span> <span class="n">ratings</span>
+<span class="n">UNWIND</span> <span class="n">ratings</span> <span class="n">AS</span> <span class="n">r</span>
+<span class="n">WITH</span> <span class="nb">sum</span><span class="p">(</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">r1</span><span class="o">.</span><span class="n">rating</span><span class="o">-</span> <span class="n">my_average</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">r2</span><span class="o">.</span><span class="n">rating</span><span class="o">-</span> <span class="n">other_average</span><span class="p">)</span> <span class="p">)</span> <span class="n">AS</span> <span class="n">a</span><span class="p">,</span>
+<span class="n">sqrt</span><span class="p">(</span> <span class="nb">sum</span><span class="p">(</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">r1</span><span class="o">.</span><span class="n">rating</span> <span class="o">-</span> <span class="n">my_average</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">r2</span><span class="o">.</span><span class="n">rating</span> <span class="o">-</span> <span class="n">other_average</span><span class="p">)</span> <span class="o">^</span><span class="mi">2</span><span class="p">))</span> <span class="n">AS</span> <span class="n">b</span><span class="p">,</span>
+<span class="n">me</span><span class="p">,</span> <span class="n">other</span> 
+<span class="n">WHERE</span> <span class="n">b</span> <span class="o">&lt;&gt;</span> <span class="mi">0</span>
+<span class="n">WITH</span> <span class="n">me</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">a</span><span class="o">/</span><span class="n">b</span> <span class="k">as</span> <span class="n">correlation</span>
+<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">correlation</span> <span class="n">DESC</span> <span class="n">LIMIT</span> <span class="mi">10</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Movie</span><span class="p">)</span> <span class="n">WHERE</span> <span class="n">NOT</span> <span class="n">EXISTS</span><span class="p">(</span> <span class="p">(</span><span class="n">me</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">WITH</span> <span class="n">m</span><span class="p">,</span>  <span class="n">SUM</span><span class="p">(</span> <span class="n">correlation</span><span class="o">*</span> <span class="n">r</span><span class="o">.</span><span class="n">rating</span><span class="p">)</span> <span class="n">AS</span> <span class="n">score</span><span class="p">,</span> <span class="n">COLLECT</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="n">AS</span> <span class="n">other</span>
+<span class="n">RETURN</span> <span class="n">m</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">score</span>
+<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">score</span> <span class="n">DESC</span> <span class="n">LIMIT</span> <span class="mi">10</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/movies/9.jpg" alt="map" /></p>
+
+<p>Here we see the movie title, list of users, opinion of those were taking into consideration, and score, which sum by the number of users of the rating given by user multiplied by the correlation coefficient of this user.</p>
+
+<p>Here is the visualization.</p>
+
+<p><img src="/assets/img/movies/10.jpg" alt="map" /></p>
+
+<p>We can find here user who are highly correlated with user 220, and their ratings toward chosen movies. Six of such users gave a high rate to the leading movie Silence of the Lambs.</p>
+
+<h3 id="negatively-correlated-recommendations">Negatively Correlated Recommendations</h3>
+
+<p>Similarly, we can find users with negative correlation: if the targeted user likes particular movies, the user with high negative correlation will hate it, and the opposite. Then we can use such “anti-recommendation” and hide these movies from the user in order not to upset him.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MATCH</span> <span class="p">(</span><span class="n">me</span><span class="p">:</span><span class="n">User</span> <span class="p">{</span><span class="nb">id</span><span class="p">:</span><span class="s">"220"</span><span class="p">})</span><span class="o">-</span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Movie</span><span class="p">)</span>
+<span class="n">WITH</span> <span class="n">me</span><span class="p">,</span> <span class="n">avg</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">rating</span><span class="p">)</span> <span class="n">AS</span> <span class="n">my_average</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">me</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">r1</span><span class="p">:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Movie</span><span class="p">)</span><span class="o">&lt;-</span><span class="p">[</span><span class="n">r2</span><span class="p">:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+<span class="n">WITH</span> <span class="n">me</span><span class="p">,</span> <span class="n">my_average</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">COLLECT</span><span class="p">({</span><span class="n">r1</span><span class="p">:</span> <span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">:</span> <span class="n">r2</span><span class="p">})</span> <span class="n">AS</span> <span class="n">ratings</span> <span class="n">WHERE</span> <span class="n">size</span><span class="p">(</span><span class="n">ratings</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Movie</span><span class="p">)</span>
+<span class="n">WITH</span> <span class="n">me</span><span class="p">,</span> <span class="n">my_average</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">avg</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">rating</span><span class="p">)</span> <span class="n">AS</span> <span class="n">other_average</span><span class="p">,</span> <span class="n">ratings</span>
+<span class="n">UNWIND</span> <span class="n">ratings</span> <span class="n">AS</span> <span class="n">r</span>
+<span class="n">WITH</span> <span class="nb">sum</span><span class="p">(</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">r1</span><span class="o">.</span><span class="n">rating</span><span class="o">-</span> <span class="n">my_average</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">r2</span><span class="o">.</span><span class="n">rating</span><span class="o">-</span> <span class="n">other_average</span><span class="p">)</span> <span class="p">)</span> <span class="n">AS</span> <span class="n">a</span><span class="p">,</span>
+<span class="n">sqrt</span><span class="p">(</span> <span class="nb">sum</span><span class="p">(</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">r1</span><span class="o">.</span><span class="n">rating</span> <span class="o">-</span> <span class="n">my_average</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">r2</span><span class="o">.</span><span class="n">rating</span> <span class="o">-</span> <span class="n">other_average</span><span class="p">)</span> <span class="o">^</span><span class="mi">2</span><span class="p">))</span> <span class="n">AS</span> <span class="n">b</span><span class="p">,</span>
+<span class="n">me</span><span class="p">,</span> <span class="n">other</span> 
+<span class="n">WHERE</span> <span class="n">b</span> <span class="o">&lt;&gt;</span> <span class="mi">0</span>
+<span class="n">WITH</span> <span class="n">me</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">a</span><span class="o">/</span><span class="n">b</span> <span class="k">as</span> <span class="n">correlation</span>
+<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">correlation</span> <span class="n">ASC</span> <span class="n">LIMIT</span> <span class="mi">10</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">Movie</span><span class="p">)</span> <span class="n">WHERE</span> <span class="n">NOT</span> <span class="n">EXISTS</span><span class="p">(</span> <span class="p">(</span><span class="n">me</span><span class="p">)</span><span class="o">-</span><span class="p">[:</span><span class="n">RATED</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">WITH</span> <span class="n">m</span><span class="p">,</span>  <span class="n">SUM</span><span class="p">(</span> <span class="n">correlation</span><span class="o">*</span> <span class="n">r</span><span class="o">.</span><span class="n">rating</span><span class="p">)</span> <span class="n">AS</span> <span class="n">score</span><span class="p">,</span> <span class="n">COLLECT</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="n">AS</span> <span class="n">other</span>
+<span class="n">RETURN</span> <span class="n">m</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">score</span>
+<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">score</span> <span class="n">ASC</span> <span class="n">LIMIT</span> <span class="mi">10</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/movies/11.jpg" alt="map" /></p>
+
+<h1 id="references">References</h1>
+<p><a href="https://neo4j.com/">https://neo4j.com/</a></p>
+
+<p><a href="http://guides.neo4j.com/sandbox/recommendations">http://guides.neo4j.com/sandbox/recommendations</a></p>
+
+<p><a href="https://neo4j.com/developer/movie-database/#_import_instructions">https://neo4j.com/developer/movie-database/#_import_instructions</a></p>
+
+<p><a href="https://neo4j.com/graphgist/competency-management-a-matter-of-filtering-and-recommendation-engines#competences">https://neo4j.com/graphgist/competency-management-a-matter-of-filtering-and-recommendation-engines#competences</a></p>
+
+<p><a href="https://github.com/citruz/movies4j">https://github.com/citruz/movies4j</a></p>
+
+<p><a href="https://neo4j.com/blog/real-time-recommendation-engine-data-science/">https://neo4j.com/blog/real-time-recommendation-engine-data-science/</a></p>
+
+<p><a href="https://en.wikipedia.org/wiki/Jaccard_index">https://en.wikipedia.org/wiki/Jaccard_index</a></p>
+
+<p><a href="https://en.wikipedia.org/wiki/Pearson_correlation_coefficient">https://en.wikipedia.org/wiki/Pearson_correlation_coefficient</a></p>
+
+<p><a href="https://www.kaggle.com/tmdb/tmdb-movie-metadata">https://www.kaggle.com/tmdb/tmdb-movie-metadata</a></p>
+
+<p><a href="https://www.themoviedb.org/">https://www.themoviedb.org/</a></p>
+
+<p><a href="https://grouplens.org/datasets/movielens/">https://grouplens.org/datasets/movielens/</a></p>
+
+<p><a href="https://doi.org/10.1145/2827872">https://doi.org/10.1145/2827872</a></p>
+
+
+      <div class="page-footer">
+        <div class="page-share">
+          <a href="https://twitter.com/intent/tweet?text=Movie Recommendation System Using Graph Database - Collaborative Filtering&url=https://juliazozulia.github.io//Movie_Recommendation_System_Collaborative_Filtering/" title="Share on Twitter" rel="nofollow" target="_blank">Twitter</a>
+          <a href="https://facebook.com/sharer.php?u=https://juliazozulia.github.io//Movie_Recommendation_System_Collaborative_Filtering/" title="Share on Facebook" rel="nofollow" target="_blank">Facebook</a>
+          <a href="https://plus.google.com/share?url=https://juliazozulia.github.io//Movie_Recommendation_System_Collaborative_Filtering/" title="Share on Google+" rel="nofollow" target="_blank">Google+</a>
+        </div>
+        <div class="page-tag">
+          
+            <a href="/tags#graph database" class="tag">&#35; graph database</a>
+          
+            <a href="/tags#neo4j" class="tag">&#35; neo4j</a>
+          
+            <a href="/tags#recommendation system" class="tag">&#35; recommendation system</a>
+          
+            <a href="/tags#movies" class="tag">&#35; movies</a>
+          
+        </div>
+      </div>
+      <section class="comment-area">
+  <div class="comment-wrapper">
+    
+    <div id="disqus_thread" class="article-comments"></div>
+    <script>
+      (function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//julia_zozulia.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+  </div>
+</section> <!-- End Comment Area -->
+
+    </div> <!-- End Wrap Content -->
+  </div> <!-- End Page Content -->
+</article> <!-- End Article Page -->
+
+</div>
+
+  </div>
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-153204014-1', 'auto');
+  ga('send', 'pageview');
+</script> <!-- End Analytics -->
+
+</body>
+</html>
